@@ -3,17 +3,12 @@
 
 {% block cur_tasks %}
     <ul class="list-group todos mx-auto text-light delete">
+        {% for task in tasks %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span>Go to the grocery</span>
+            <span> {{task.description}} </span>
             <i class="far fa-trash-alt delete"></i>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span>Do the Laundry</span>
-            <i class="far fa-trash-alt delete"></i>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span>Walk the dog</span>
-            <i class="far fa-trash-alt delete"></i>
-        </li>
+        {% endfor %}
     </ul>
+
 {% endblock %}
