@@ -6,7 +6,7 @@
         {% for task in tasks %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span> {{task.description}} </span>
-            <i class="far fa-trash-alt delete"></i>
+            <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
         </li>
         {% endfor %}
     </ul>
