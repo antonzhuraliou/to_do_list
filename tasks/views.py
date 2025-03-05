@@ -14,4 +14,7 @@ def get_page(request):
             return HttpResponseRedirect('/')
     return render(request, 'tasks/cur_tasks.html', context = {'tasks': tasks, 'form': form})
 
-
+def del_task(request, id):
+    delete_task = Task.objects.get(id = id)
+    delete_task.delete()
+    return HttpResponseRedirect('/')
