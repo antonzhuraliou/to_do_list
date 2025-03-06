@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from .models import Task
+from .models import Task, CompletedTask
 from .forms import TodoForm
 from django.http import HttpResponseRedirect
+from datetime import datetime
 # Create your views here.
 
 def get_page(request):
@@ -17,4 +18,11 @@ def get_page(request):
 def del_task(request, id):
     delete_task = Task.objects.get(id = id)
     delete_task.delete()
+    return HttpResponseRedirect('/')
+
+def complete_task(request, id):
+    delete_task = Task.objects.get(id=id)
+    completed_task = CompletedTask(description = delete_task.description, created_at = datetime.now())
+    delete_task.delete()
+    completed_task.save()
     return HttpResponseRedirect('/')
