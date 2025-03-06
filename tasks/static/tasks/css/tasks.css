@@ -37,3 +37,36 @@ input[type="text"]:focus {
   border-radius: 13px 13px;
   transition: 0.8s;
 }
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.check-icon {
+  color: #fff;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.checked .checkbox {
+  background: #423a6f;
+  border-color: #fff;
+}
+
+.checked .check-icon {
+  opacity: 1;
+}
