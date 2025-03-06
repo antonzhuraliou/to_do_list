@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Task, CompletedTask
 from .forms import TodoForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from datetime import datetime
 # Create your views here.
 
@@ -26,3 +26,9 @@ def complete_task(request, id):
     delete_task.delete()
     completed_task.save()
     return HttpResponseRedirect('/')
+
+
+def history_of_tasks(request):
+    all_tasks = CompletedTask.objects.all()
+    create_tasks = CompletedTask.objects.values('created_at').distinct()
+    return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': create_tasks})
