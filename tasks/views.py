@@ -30,5 +30,8 @@ def complete_task(request, id):
 
 def history_of_tasks(request):
     all_tasks = CompletedTask.objects.all()
-    create_tasks = CompletedTask.objects.values('created_at').distinct()
+    create_tasks = CompletedTask.objects.values('created_at').distinct().order_by('-created_at', )
     return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': create_tasks})
+
+def edit_task(request, id):
+    return HttpResponseRedirect('/')
