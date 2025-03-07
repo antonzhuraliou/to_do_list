@@ -70,3 +70,18 @@ input[type="text"]:focus {
 .checked .check-icon {
   opacity: 1;
 }
+
+.edit-icon {
+  cursor: pointer;
+  color: #fff;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #ffcc00;
+}
+
+.delete:hover {
+  color: #ffcc00;
+}
