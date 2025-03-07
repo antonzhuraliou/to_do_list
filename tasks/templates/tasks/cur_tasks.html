@@ -9,8 +9,11 @@
                     <a href="{% url 'completed_task' id=task.id%}"><i class="fas fa-check check-icon"></i></a>
                 </div>
             </div>
-            <span> {{ task.description }} </span>
-            <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
+            <span class="task-text"> {{ task.description }} </span>
+            <div>
+                <a href="{% url 'edit_todo' id=task.id %}" class="edit-icon"><i class="fas fa-pen"></i></a>
+                <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
+            </div>
         </li>
         {% endfor %}
     </ul>
