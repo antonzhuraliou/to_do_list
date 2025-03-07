@@ -6,6 +6,9 @@ body {
 
 .container {
   max-width: 400px;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 input[type="text"],
@@ -16,9 +19,35 @@ input[type="text"]:focus {
   max-width: 400px;
 }
 
+.todos {
+  max-width: 100%;
+  width: 100%;
+}
+
 .todos li {
   background: #423a6f;
   color: #fff;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.todos li .task-text {
+  flex-grow: 1;
+  margin: 0 10px;
+  max-width: calc(100% - 100px);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .delete {
@@ -37,6 +66,7 @@ input[type="text"]:focus {
   border-radius: 13px 13px;
   transition: 0.8s;
 }
+
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -62,12 +92,12 @@ input[type="text"]:focus {
   transition: opacity 0.3s ease;
 }
 
-.checked .checkbox {
+.checkbox-container.checked .checkbox {
   background: #423a6f;
   border-color: #fff;
 }
 
-.checked .check-icon {
+.checkbox-container.checked .check-icon {
   opacity: 1;
 }
 
