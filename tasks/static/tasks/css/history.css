@@ -34,4 +34,35 @@ body {
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-text {
+  flex-grow: 1;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.edit-icon,
+.delete-icon,
+.restore-icon {
+  cursor: pointer;
+  color: #fff;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #ffcc00;
+}
+
+.delete-icon:hover {
+  color: #ff4444;
+}
+
+.restore-icon:hover {
+  color: #4caf50;
 }
