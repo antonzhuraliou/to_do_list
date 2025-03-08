@@ -43,3 +43,8 @@ def del_from_history(request, id):
     delete_task.delete()
     return HttpResponseRedirect('/history')
 
+def restore_todo(request, id):
+    restore_task = CompletedTask.objects.get(id=id)
+    new_task = Task.objects.create(description = restore_task.description)
+    restore_task.delete()
+    return HttpResponseRedirect('/history')
