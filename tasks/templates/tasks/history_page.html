@@ -23,6 +23,9 @@
   <body>
     <div class="container history-container text-light">
       <h2 class="text-center">Completed Tasks History</h2>
+      <div class="text-center mb-4">
+        <a href="{% url 'main_page' %}"><span class="back-to-tasks"><i class="fas fa-arrow-left"></i> Back to Todos</span></a>
+      </div>
       <br>
       {% for dt in date %}
       <div class="history-section">
@@ -35,7 +38,7 @@
                 <div>
                   <a href=""><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
                   <a href="{% url 'delete_history' id=desc.id %}"><i class="fas fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
-                  <i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i>
+                  <a href="{% url 'restore_todo' id=desc.id %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
                 </div>
               </li>
             {% endif %}
@@ -46,4 +49,5 @@
     </div>
   </body>
 </html>
+
 
