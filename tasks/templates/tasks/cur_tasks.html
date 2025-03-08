@@ -4,7 +4,11 @@
 {% block tasks_for_today %}
 <div class="task-counter">
     <i class="fas fa-check-circle"></i>
-    <span id="taskCount">{{count}} for today</span>
+    {% if count > 1 %}
+        <span id="taskCount"> {{count}} tasks for today</span>
+    {% else %}
+        <span id="taskCount1"> {{count}} task for today</span>
+    {% endif%}
 </div>
 {% endblock %}
 
