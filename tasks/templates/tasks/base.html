@@ -23,7 +23,7 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Libre+Franklin:wght@200&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}">/>
+    <link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}">
     <title>Document</title>
   </head>
 
@@ -31,6 +31,9 @@
     <div class="container">
       <header class="text-center text-light my-4">
         <h1 class="mb-4">Todo List</h1>
+        {% block tasks_for_today %}
+
+        {% endblock %}
         <form class="search">
           <input
             class="form-control m-auto"
@@ -41,9 +44,7 @@
         </form>
       </header>
 
-
       {% block cur_tasks %}
-
       {% endblock %}
 
       <form method="post" class="add text-center my-4">
