@@ -34,32 +34,22 @@
         {% block tasks_for_today %}
 
         {% endblock %}
-        <form class="search">
-          <input
-            class="form-control m-auto"
-            type="text"
-            name="search"
-            placeholder="search todos"
-          />
-        </form>
       </header>
-
-      {% block cur_tasks %}
-      {% endblock %}
 
       <form method="post" class="add text-center my-4">
         {% csrf_token %}
-        <label class="text-light">Add a new todo...</label>
         {{ form.add }}
-        <br />
         <div class="text-center">
           <input type="submit" class="btn btn-light" />
         </div>
       </form>
 
+      {% block cur_tasks %}
+      {% endblock %}
+
       <div class="text-center my-4">
         <a href="{% url 'history' %}">
-          <button class="btn btn-light">TO-DO History</button>
+          <button class="btn btn-light">Todo History</button>
         </a>
       </div>
     </div>
