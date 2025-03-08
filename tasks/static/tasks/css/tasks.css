@@ -115,21 +115,21 @@ input[type="text"]:focus {
 .delete:hover {
   color: #ffcc00;
 }
-.title-container {
+
+.task-tracker {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px; /* Расстояние между трекером и заголовком */
+  font-size: 18px;
+  color: #fff;
+  margin: 10px 0;
 }
 
-.task-counter {
-  display: flex;
-  align-items: center;
+.task-icon {
   font-size: 20px;
+  margin-right: 5px;
   color: #fff;
 }
 
-.task-counter i {
-  margin-right: 5px;
-  color: #ffcc00;
+.task-count {
+  font-weight: bold;
 }
