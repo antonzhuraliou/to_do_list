@@ -66,3 +66,27 @@ body {
 .restore-icon:hover {
   color: #4caf50;
 }
+
+.back-to-tasks {
+  font-size: 18px;
+  color: #ffcc00;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-to-tasks i {
+  margin-right: 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.back-to-tasks:hover {
+  color: #ffbb33;
+  cursor: pointer; /* Указатель с вытянутым пальцем */
+}
+
+.back-to-tasks:hover i {
+  /* Поворот стрелки при наведении */
+  transform: rotate(180deg);
+  color: #ff4444; /* Меняем цвет стрелки */
+}
