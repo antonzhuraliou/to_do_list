@@ -1,5 +1,14 @@
 {% extends 'tasks/base.html' %}
 
+
+{% block tasks_for_today %}
+<div class="task-counter">
+    <i class="fas fa-check-circle"></i>
+    <span id="taskCount">{{count}} for today</span>
+</div>
+{% endblock %}
+
+
 {% block cur_tasks %}
     <ul class="list-group todos mx-auto text-light">
         {% for task in tasks %}
