@@ -68,25 +68,31 @@ body {
 }
 
 .back-to-tasks {
-  font-size: 18px;
-  color: #ffcc00;
+  font-size: 21px;
+  color: #fff;
   cursor: pointer;
   text-decoration: none;
+  outline: none;
   transition: color 0.3s ease;
 }
 
 .back-to-tasks i {
   margin-right: 8px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: none;
 }
 
 .back-to-tasks:hover {
-  color: #ffbb33;
-  cursor: pointer; /* Указатель с вытянутым пальцем */
+  color: #ddd;
 }
 
-.back-to-tasks:hover i {
-  /* Поворот стрелки при наведении */
-  transform: rotate(180deg);
-  color: #ff4444; /* Меняем цвет стрелки */
+/* Добавьте этот стиль для всех ссылок */
+a {
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  outline: none;
 }
