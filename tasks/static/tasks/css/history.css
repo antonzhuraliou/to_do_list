@@ -51,7 +51,6 @@ body {
 .restore-icon {
   cursor: pointer;
   color: #fff;
-  margin-left: 10px;
   transition: color 0.3s ease;
 }
 
@@ -85,7 +84,6 @@ body {
   color: #ddd;
 }
 
-/* Добавьте этот стиль для всех ссылок */
 a {
   text-decoration: none;
   outline: none;

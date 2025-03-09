@@ -104,7 +104,7 @@ input[type="text"]:focus {
 .edit-icon {
   cursor: pointer;
   color: #fff;
-  margin-right: 10px;
+  margin-right: 3px;
   transition: color 0.3s ease;
 }
 

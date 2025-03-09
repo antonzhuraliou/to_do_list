@@ -37,7 +37,7 @@
                 <span class="task-text">{{ desc.description }}</span>
                 <div>
                   <a href=""><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
-                  <a href="{% url 'delete_history' id=desc.id %}"><i class="fas fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'delete_history' id=desc.id %}"><i class="far fa-trash-alt delete data-id="{{ desc.id }}"></i></a>
                   <a href="{% url 'restore_todo' id=desc.id %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
                 </div>
               </li>
