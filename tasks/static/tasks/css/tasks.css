@@ -133,3 +133,14 @@ input[type="text"]:focus {
 .task-count {
   font-weight: bold;
 }
+
+a {
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  outline: none;
+}
