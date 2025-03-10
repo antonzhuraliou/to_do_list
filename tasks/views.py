@@ -3,7 +3,9 @@ from .models import Task, CompletedTask
 from .forms import TodoForm
 from django.http import HttpResponseRedirect, HttpResponse
 from datetime import datetime
-# Create your views here.
+from django.views.generic import UpdateView
+from .forms import EditForm
+
 
 def get_page(request):
     tasks = Task.objects.all()
@@ -36,7 +38,15 @@ def history_of_tasks(request):
     return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': create_tasks})
 
 def edit_task(request, id):
-    return HttpResponseRedirect('/')
+    cur_task = Task.objects.get(id = id)
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=cur_task)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = EditForm(instance=cur_task)
+    return render(request, 'tasks/edit_task.html', {'form': form})
 
 def del_from_history(request, id):
     delete_task = CompletedTask.objects.get(id = id)
