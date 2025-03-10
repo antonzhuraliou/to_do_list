@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from datetime import datetime
 from django.views.generic import UpdateView
 from .forms import EditForm
-
+import typing
 
 def get_page(request):
     tasks = Task.objects.all()
@@ -58,3 +58,15 @@ def restore_todo(request, id):
     new_task = Task.objects.create(description = restore_task.description)
     restore_task.delete()
     return HttpResponseRedirect('/history')
+
+
+def edit_in_history(request, id):
+    cur_task = CompletedTask.objects.get(id = id)
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=cur_task)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/history')
+    else:
+        form = EditForm(instance=cur_task)
+    return render(request, 'tasks/edit_task.html', {'form': form})
