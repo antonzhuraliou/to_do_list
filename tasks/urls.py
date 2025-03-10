@@ -1,14 +1,14 @@
 
 from django.urls import path
-from .views import get_page, del_task, complete_task, history_of_tasks, edit_task, del_from_history, restore_todo, edit_in_history
+from tasks import views
 
 urlpatterns = [
-    path('', get_page, name = 'main_page'),
-    path('delete/<int:id>', del_task, name='delete_todo'),
-    path('completed/<int:id>', complete_task, name='completed_task'),
-    path('history/', history_of_tasks, name = 'history'),
-    path('edit/<int:id>/', edit_task, name='edit_todo'),
-    path('delete_history/<int:id>/', del_from_history, name = 'delete_history'),
-    path('restore_todo/<int:id>/', restore_todo, name = 'restore_todo'),
-    path('edit_in_history/<int:id>/', edit_in_history, name='edit_history'),
+    path('', views.get_main_page, name = 'main_page'),
+    path('delete/<int:id>', views.delete_task, name='delete_todo'),
+    path('complete/<int:id>', views.complete_task, name='complete_todo'),
+    path('edit/<int:id>/', views.edit_task, name='edit_todo'),
+    path('history/', views.task_history, name = 'history'),
+    path('delete_task_from_history/<int:id>/', views.delete_task_from_history, name = 'history_delete'),
+    path('restore_task_from_history/<int:id>/', views.restore_task_from_history, name = 'history_restore'),
+    path('edit_task_in_history/<int:id>/', views.edit_task_in_history, name='history_edit'),
     ]
