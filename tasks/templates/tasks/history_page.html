@@ -36,9 +36,9 @@
               <li class="list-group-item completed-task d-flex justify-content-between align-items-center">
                 <span class="task-text">{{ desc.description }}</span>
                 <div>
-                  <a href="{% url 'edit_history' id=desc.id %}"><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
-                  <a href="{% url 'delete_history' id=desc.id %}"><i class="far fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
-                  <a href="{% url 'restore_todo' id=desc.id %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'history_edit' id=desc.id %}"><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'history_delete' id=desc.id %}"><i class="far fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'history_restore' id=desc.id %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
                 </div>
               </li>
             {% endif %}

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,9 +32,11 @@
     <div class="container">
       <header class="text-center text-light my-4">
         <h1 class="mb-4">Todo List</h1>
+
         {% block tasks_for_today %}
 
         {% endblock %}
+
       </header>
 
       <form method="post" class="add text-center my-4">
@@ -45,6 +48,7 @@
       </form>
 
       {% block cur_tasks %}
+
       {% endblock %}
 
       <div class="text-center my-4">
@@ -53,7 +57,6 @@
         </a>
       </div>
     </div>
-
     <script src="app.js"></script>
   </body>
 </html>
