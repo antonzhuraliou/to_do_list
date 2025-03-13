@@ -12,7 +12,7 @@ from .forms import TodoForm, EditForm
 def get_main_page(request):
     today_date_day = date.today().day
     today_date = date.today()
-    all_tasks = Task.objects.all()
+    all_tasks = Task.objects.filter(created_at__date = today_date)
     count_tasks = all_tasks.count()
     form = TodoForm()
 
@@ -98,11 +98,14 @@ def get_calendar(request):
 
 
 def calendar_task(request, day, month, year):
+    all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
+    actual_month = calendar.month_name[month]
+    date_to_add = (year, actual_month, day)
     form = TodoForm()
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
             Task.objects.create(description=form.cleaned_data['description'], created_at = date(year, month, day))
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(f'/task_for_day/{day}/{month}/{year}/')
 
-    return render(request, 'tasks/day_task_page.html', context = {'form': form})
+    return render(request, 'tasks/day_task_page.html', context = {'form': form, 'date_to_add':date_to_add, 'all_tasks': all_tasks})
