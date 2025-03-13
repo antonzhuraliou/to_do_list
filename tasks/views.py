@@ -91,5 +91,18 @@ def get_calendar(request):
     # Получаем цифровое значение первого дня в месяце для правильной генерации расположения календаря
     today_date = date.today()
     first_day_number, days_in_month = calendar.monthrange(today_date.year, today_date.month)
+    actual_month = calendar.month_name[today_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days})
+    return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
+                                                                  'today_year': today_date, 'actual_month': actual_month})
+
+
+def calendar_task(request, day, month, year):
+    form = TodoForm()
+    if request.method == 'POST':
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            Task.objects.create(description=form.cleaned_data['description'], created_at = date(year, month, day))
+            return HttpResponseRedirect('/')
+
+    return render(request, 'tasks/day_task_page.html', context = {'form': form})
