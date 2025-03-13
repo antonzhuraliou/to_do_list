@@ -24,7 +24,7 @@
                 {% endfor %}
 
                 {% for day in days_in_month|my_range %}
-                <a href="">
+                <a href="{% url 'day_task' day=day month=today_year.month year=today_year.year%}">
                     <div class="day">{{day}}</div>
                 </a>
                 {%  endfor %}
