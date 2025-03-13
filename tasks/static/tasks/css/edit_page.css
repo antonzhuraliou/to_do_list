@@ -1,0 +1,99 @@
+/* Стиль для страницы редактирования */
+body {
+  background: #352f5b;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 23px;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 50px auto;
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.edit-form {
+  background: #423a6f;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+.edit-form input[type="text"] {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-form-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;  /* Убедимся, что контейнер кнопки займет всю ширину */
+}
+
+.edit-form button {
+  background: #423a6f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%; /* Задаем ширину кнопки */
+  max-width: 250px; /* Максимальная ширина кнопки */
+  margin: 0 auto; /* Это должно выровнять кнопку по центру */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.edit-form button:hover {
+  background: #352f5b;
+}
+
+.cancel-btn {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-top: 15px;
+  display: block;
+  text-align: center;
+}
+
+.cancel-btn:hover {
+  color: #ffcc00;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+  outline: none;
+}
