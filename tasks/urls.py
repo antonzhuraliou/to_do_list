@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete_task_from_history/<int:id>/', views.delete_task_from_history, name = 'history_delete'),
     path('restore_task_from_history/<int:id>/', views.restore_task_from_history, name = 'history_restore'),
     path('edit_task_in_history/<int:id>/', views.edit_task_in_history, name='history_edit'),
+    path('get_calendar/', views.get_calendar, name='calendar')
     ]
