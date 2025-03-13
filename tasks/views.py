@@ -10,6 +10,8 @@ from .forms import TodoForm, EditForm
 
 
 def get_main_page(request):
+    today_date_day = date.today().day
+    today_date = date.today()
     all_tasks = Task.objects.all()
     count_tasks = all_tasks.count()
     form = TodoForm()
@@ -17,10 +19,10 @@ def get_main_page(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
-            Task.objects.create(description = form.cleaned_data['add'])
+            Task.objects.create(description = form.cleaned_data['description'], created_at = date(today_date.year, today_date.month, today_date.day))
             return HttpResponseRedirect('/')
 
-    return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks})
+    return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks, 'today_day': today_date_day})
 
 
 def complete_task(request, id):
