@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/1362334b71.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Libre+Franklin:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="text-center text-light my-4">
+        <h1 class="mb-4">Add task to for March 14 2025 </h1>
+      </header>
+
+      <form method="post" class="add text-center my-4">
+        {% csrf_token %}
+        {{ form.description }}
+        <div class="text-center">
+          <input type="submit" class="btn btn-light" />
+        </div>
+      </form>
+
+    <ul class="list-group todos mx-auto text-light">
+        {% for task in all_tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="checkbox-container" onclick="toggleCheck(this)">
+                <div class="checkbox">
+                    <a href="{% url 'complete_todo' id=task.id%}"><i class="fas fa-check check-icon"></i></a>
+                </div>
+            </div>
+            <span class="task-text"> {{ task.description }} </span>
+            <div>
+                <a href="{% url 'edit_todo' id=task.id %}" class="edit-icon"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <script>
+        function toggleCheck(element) {
+            element.classList.toggle("checked");
+        }
+    </script>
+
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
