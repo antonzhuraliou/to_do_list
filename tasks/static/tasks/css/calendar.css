@@ -1,0 +1,73 @@
+body {
+    background: #352f5b;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 23px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Отключаем прокрутку */
+}
+
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px; /* Добавлен отступ по бокам */
+    box-sizing: border-box;
+}
+
+.calendar {
+    background: #423a6f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Ограничение ширины */
+    box-sizing: border-box;
+}
+
+.calendar-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Каждую строку делим на 7 колонок */
+    gap: 5px;
+    padding: 0 10px; /* Добавляем отступ для клеточек */
+}
+
+.day-header {
+    font-size: 14px; /* Уменьшили размер шрифта для названий дней */
+    font-weight: bold;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    white-space: nowrap; /* Запрещаем перенос слов на несколько строк */
+}
+
+.day {
+    padding: 10px; /* Уменьшаем padding, чтобы клеточки не выходили за пределы */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    box-sizing: border-box; /* Учитываем отступы внутри ячеек */
+    font-size: 16px; /* Меньший размер шрифта для клеточек */
+    word-wrap: break-word; /* Текст не будет выходить за пределы клетки */
+}
+
+.day:hover {
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.empty {
+    background: none;
+}
