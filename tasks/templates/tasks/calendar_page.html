@@ -12,7 +12,7 @@
     <div class="calendar-container">
         <div class="calendar">
             <div class="calendar-header">
-                <span class="month-year">March 2024</span>
+                <span class="month-year">{{actual_month}}, {{today_year.year}}</span>
             </div>
             <div class="calendar-grid">
                 {% for w_day in week_days %}
@@ -24,7 +24,9 @@
                 {% endfor %}
 
                 {% for day in days_in_month|my_range %}
+                <a href="">
                     <div class="day">{{day}}</div>
+                </a>
                 {%  endfor %}
             </div>
         </div>
