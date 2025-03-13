@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+{% load my_filters %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь</title>
+    <link rel="stylesheet" href="{% static 'tasks/css/calendar.css' %}">
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar">
+            <div class="calendar-header">
+                <span class="month-year">March 2024</span>
+            </div>
+            <div class="calendar-grid">
+                {% for w_day in week_days %}
+                    <div class="day-header">{{ w_day }}</div>
+                {% endfor %}
+
+                {% for day in empty_days|my_range %}
+                    <div class="day empty"></div>
+                {% endfor %}
+
+                {% for day in days_in_month|my_range %}
+                    <div class="day">{{day}}</div>
+                {%  endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
