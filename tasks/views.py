@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, date
+import calendar
 from typing import Any
 
 from django.shortcuts import render
@@ -81,3 +82,12 @@ def edit_task_in_history(request, id):
         form = EditForm(instance=current_task)
 
     return render(request, 'tasks/edit_task.html', {'form': form})
+
+
+def get_calendar(request):
+    # Получаем количество дней в текущем месяце и передаем в контекст
+    # Получаем цифровое значение первого дня в месяце для правильной генерации расположения календаря
+    today_date = date.today()
+    first_day_number, days_in_month = calendar.monthrange(today_date.year, today_date.month)
+    week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days})
