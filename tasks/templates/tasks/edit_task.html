@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Task</title>
+  <link rel="stylesheet" href="{% static 'tasks/css/edit_page.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h2>Edit Task</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="edit-form">
+          {{ form.description }}
+        <button type="submit" class="btn">Save changes</button>
+      </div>
+    </form>
+    {% if form.get_model_name == CompletedTask %}
+      <a href="{% url 'history' %}" class="btn cancel-btn">Cancel</a>
+    {% else %}
+      <a href="{% url 'main_page' %}" class="btn cancel-btn">Cancel</a>
+    {% endif %}
+  </div>
+</body>
+</html>
