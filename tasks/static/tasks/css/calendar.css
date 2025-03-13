@@ -71,3 +71,12 @@ body {
 .empty {
     background: none;
 }
+a {
+    color: inherit; /* Наследует цвет родительского элемента */
+    text-decoration: none; /* Убирает подчеркивание */
+}
+
+a:hover {
+    color: inherit; /* При наведении не изменяется цвет */
+    text-decoration: none; /* Убирает подчеркивание при наведении */
+}
