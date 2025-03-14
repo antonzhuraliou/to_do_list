@@ -9,6 +9,7 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden; /* Отключаем прокрутку */
+    flex-direction: column; /* Align items vertically */
 }
 
 .calendar-container {
@@ -18,6 +19,8 @@ body {
     width: 100%;
     padding: 0 20px; /* Добавлен отступ по бокам */
     box-sizing: border-box;
+    flex-direction: column; /* Align calendar and button vertically */
+    gap: 20px; /* Space between calendar and button */
 }
 
 .calendar {
@@ -71,6 +74,7 @@ body {
 .empty {
     background: none;
 }
+
 a {
     color: inherit; /* Наследует цвет родительского элемента */
     text-decoration: none; /* Убирает подчеркивание */
@@ -79,4 +83,32 @@ a {
 a:hover {
     color: inherit; /* При наведении не изменяется цвет */
     text-decoration: none; /* Убирает подчеркивание при наведении */
+}
+
+.calendar-back-container {
+  display: flex;
+  justify-content: center; /* Центрируем кнопку */
+  margin-top: 20px; /* Добавляем отступ от календаря */
+}
+
+.calendar-back-to-tasks {
+  display: flex;
+  align-items: center;
+  font-size: 21px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.calendar-back-to-tasks i {
+  margin-right: 8px; /* Отступ между стрелкой и текстом */
+  font-size: 30px; /* Увеличиваем размер стрелки */
+  display: inline-block; /* Гарантирует отображение */
+  visibility: visible; /* Проверка на скрытие */
+}
+
+.calendar-back-to-tasks:hover {
+  color: #ddd;
 }
