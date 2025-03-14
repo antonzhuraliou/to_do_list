@@ -28,8 +28,14 @@
                     <div class="day">{{day}}</div>
                 </a>
                 {%  endfor %}
+
             </div>
         </div>
+    </div>
+    <div class="calendar-back-container">
+        <a href="{% url 'main_page' %}" class="calendar-back-to-tasks">
+            <i class="fas fa-arrow-left"></i> Back to Todos
+        </a>
     </div>
 </body>
 </html>
