@@ -40,7 +40,7 @@ def delete_task(request, id):
 
 def edit_task(request, id):
     current_task = Task.objects.get(id = id)
-
+    model_name = current_task._meta.model.__name__
     if request.method == 'POST':
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
@@ -49,7 +49,7 @@ def edit_task(request, id):
     else:
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'model_name': model_name})
 
 
 def task_history(request):
@@ -73,7 +73,7 @@ def restore_task_from_history(request, id):
 
 def edit_task_in_history(request, id):
     current_task = CompletedTask.objects.get(id = id)
-
+    model_name = current_task._meta.model.__name__
     if request.method == 'POST':
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
@@ -83,7 +83,7 @@ def edit_task_in_history(request, id):
     else:
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'model_name': model_name})
 
 
 def get_calendar(request):
