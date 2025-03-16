@@ -66,7 +66,7 @@ def delete_task_from_history(request, id):
 
 def restore_task_from_history(request, id):
     task_to_restore = CompletedTask.objects.get(id=id)
-    Task.objects.create(description = task_to_restore.description)
+    Task.objects.create(description = task_to_restore.description, created_at = date.today())
     task_to_restore.delete()
     return HttpResponseRedirect('/history')
 
