@@ -5,8 +5,7 @@ from django.db import models
 class Task(models.Model):
 
     description = models.CharField(max_length=100)
-    is_completed = models.BooleanField(null=True, blank=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(null=True, blank=True)
 
 
 class CompletedTask(models.Model):
