@@ -109,3 +109,8 @@ def calendar_task(request, day, month, year):
             return HttpResponseRedirect(f'/task_for_day/{day}/{month}/{year}/')
 
     return render(request, 'tasks/day_task_page.html', context = {'form': form, 'date_to_add':date_to_add, 'all_tasks': all_tasks})
+
+
+def get_completed_tasks(request, day, month, year):
+    completed_tasks = CompletedTask.objects.filter(created_at= date(year, month, day))
+    return render(request,  'tasks/completed_task.html', context = {'completed_tasks': completed_tasks})
