@@ -1,5 +1,6 @@
 from datetime import datetime, date
 import calendar
+from dateutil.relativedelta import relativedelta
 from typing import Any
 
 from django.shortcuts import render
@@ -96,6 +97,16 @@ def get_calendar(request):
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
                                                                   'today_year': today_date, 'actual_month': actual_month})
 
+def get_priv_or_next_calendar(request, month, year, sign):
+    if sign == '+':
+        current_month_date = date(year, month, 1) + relativedelta(months=1)
+    else:
+        current_month_date = date(year, month, 1) - relativedelta(months=1)
+    first_day_number, days_in_month = calendar.monthrange(current_month_date.year, current_month_date.month)
+    actual_month = calendar.month_name[current_month_date.month]
+    week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
+                                                                  'today_year': current_month_date, 'actual_month': actual_month})
 
 def calendar_task(request, day, month, year):
     all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
