@@ -112,5 +112,7 @@ def calendar_task(request, day, month, year):
 
 
 def get_completed_tasks(request, day, month, year):
+    actual_month = calendar.month_name[month]
+    date_to_add = (year, actual_month, day)
     completed_tasks = CompletedTask.objects.filter(created_at= date(year, month, day))
-    return render(request,  'tasks/completed_task.html', context = {'completed_tasks': completed_tasks})
+    return render(request,  'tasks/completed_task.html', context = {'completed_tasks': completed_tasks, 'date_to_add': date_to_add})
