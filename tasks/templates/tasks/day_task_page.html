@@ -29,7 +29,7 @@
   <body>
     <div class="container">
       <header class="text-center text-light my-4">
-        <h1 class="mb-4">Add task to for March 14 2025 </h1>
+        <h1 class="mb-4">Add task to for {{date_to_add.0}} {{date_to_add.1}} {{date_to_add.2}} </h1>
       </header>
 
       <form method="post" class="add text-center my-4">
@@ -62,6 +62,11 @@
         }
     </script>
 
+    </div>
+    <div class="calendar-back-container">
+        <a href="{% url 'calendar' %}" class="calendar-back-to-tasks">
+            <i class="fas fa-arrow-left"></i> Back to Calendar
+        </a>
     </div>
     <script src="app.js"></script>
   </body>
