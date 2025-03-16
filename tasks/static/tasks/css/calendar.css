@@ -112,3 +112,24 @@ a:hover {
 .calendar-back-to-tasks:hover {
   color: #ddd;
 }
+/* Прошедшие дни */
+.past-day {
+    opacity: 0.5; /* Затемняем прошедшие дни */
+}
+
+/* Дни с задачами */
+.day.task-day {
+    position: relative;
+}
+
+.day.task-day::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background-color: #ffcc00; /* Цвет точки */
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
