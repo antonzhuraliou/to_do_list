@@ -34,7 +34,17 @@
                         </a>
                     {% endif %}
                 {% endfor %}
-
+            </div>
+            <div class="calendar-navigation">
+                <a href="{% url 'change_month' month=today_year.month year=today_year.year sign='-'%}">
+                    <button class="nav-button" id="prev-month">&lt;</button>
+                </a>
+                <a href="{% url 'calendar' %}">
+                    <button class="nav-button" id="current-month">●</button>
+                </a>
+                <a href="{% url 'change_month' month=today_year.month year=today_year.year sign='+'%}">
+                    <button class="nav-button" id="next-month">&gt;</button>
+                </a>
             </div>
         </div>
     </div>
