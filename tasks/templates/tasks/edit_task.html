@@ -17,11 +17,12 @@
         <button type="submit" class="btn">Save changes</button>
       </div>
     </form>
-    {% if form.get_model_name == CompletedTask %}
+    {% if model_name == completedtask %}
       <a href="{% url 'history' %}" class="btn cancel-btn">Cancel</a>
     {% else %}
       <a href="{% url 'main_page' %}" class="btn cancel-btn">Cancel</a>
     {% endif %}
   </div>
+
 </body>
 </html>
