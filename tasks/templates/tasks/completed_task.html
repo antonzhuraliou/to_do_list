@@ -27,32 +27,43 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="text-center text-light my-4">
-        <h1 class="mb-4">List of completed tasks {{date_to_add.0}} {{date_to_add.1}} {{date_to_add.2}} </h1>
-      </header>
+    {% if completed_tasks%}
+        <div class="container">
+        <header class="text-center text-light my-4">
+            <h1 class="mb-4">List of completed tasks {{date_to_add.0}} {{date_to_add.1}} {{date_to_add.2}} </h1>
+        </header>
 
-    <ul class="list-group todos mx-auto text-light">
-        {% for task in completed_tasks %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="checkbox-container">
-                <div class="checkbox1">
-                  <i class="fas fa-check check-icon1"></i>
+        <ul class="list-group todos mx-auto text-light">
+            {% for task in completed_tasks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="checkbox-container">
+                    <div class="checkbox1">
+                    <i class="fas fa-check check-icon1"></i>
+                    </div>
                 </div>
-            </div>
-            <span class="task-text"> {{ task.description }} </span>
-            <div>
-                <a href="{% url 'edit_todo' id=task.id %}" class="edit-icon"><i class="fas fa-pencil-alt edit-icon"></i></a>
-                <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+                <span class="task-text"> {{ task.description }} </span>
+                <div>
+                    <a href="{% url 'edit_todo' id=task.id %}" class="edit-icon"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                    <a href="{% url 'delete_todo' id=task.id %}"><i class="far fa-trash-alt delete"></i></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <div class="container">
+            <header class="text-center text-light my-4">
+                <h1 class="mb-4">No completed tasks {{date_to_add.0}} {{date_to_add.1}} {{date_to_add.2}} </h1>
+            </header>
+        </div>
+     {% endif %}
+
     <script>
         function toggleCheck(element) {
             element.classList.toggle("checked");
         }
     </script>
+
 
     </div>
     <div class="calendar-back-container">
@@ -60,6 +71,7 @@
             <i class="fas fa-arrow-left"></i> Back to Calendar
         </a>
     </div>
+
     <script src="app.js"></script>
   </body>
 </html>
