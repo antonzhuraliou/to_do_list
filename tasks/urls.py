@@ -12,5 +12,6 @@ urlpatterns = [
     path('restore_task_from_history/<int:id>/', views.restore_task_from_history, name = 'history_restore'),
     path('edit_task_in_history/<int:id>/', views.edit_task_in_history, name='history_edit'),
     path('get_calendar/', views.get_calendar, name='calendar'),
-    path('task_for_day/<int:day>/<int:month>/<int:year>/', views.calendar_task, name = 'day_task')
+    path('task_for_day/<int:day>/<int:month>/<int:year>/', views.calendar_task, name = 'day_task'),
+    path('task_for_day_past/<int:day>/<int:month>/<int:year>/', views.get_completed_tasks, name = 'completed_task'),
     ]
