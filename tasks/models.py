@@ -11,3 +11,4 @@ class Task(models.Model):
 class CompletedTask(models.Model):
     description = models.CharField(max_length=100)
     created_at = models.DateField(null=True, blank=True)
+    is_completed = models.BooleanField(default=True)
