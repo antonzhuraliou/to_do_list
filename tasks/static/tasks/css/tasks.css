@@ -218,3 +218,17 @@ a:hover {
     color: #423a6f; /* Делаем галочку белой */
     font-size: 16px;
 }
+.checkbox2 {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%; /* Делаем кружок */
+    background-color: white; /* Белый фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-icon2 {
+    color: #423a6f; /* Цвет крестика */
+    font-size: 16px;
+}
