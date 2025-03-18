@@ -24,17 +24,20 @@
                 {% endfor %}
 
                 {% for day in days_in_month|my_range %}
-                    {% if day < today_year.day %}
-                        <a href="{% url 'completed_task' day=day month=today_year.month year=today_year.year%}">
-                            <div class="day past-day">{{ day }}</div>
-                        </a>
-                    {% else %}
+                    {% if day > today_compare.day and today_year.month == today_compare.month  or today_year.month > today_compare.month or today_year.year > today_compare.year %}
                         <a href="{% url 'day_task' day=day month=today_year.month year=today_year.year%}">
                             <div class="day">{{day}}</div>
                         </a>
+
+                    {% else %}
+                        <a href="{% url 'completed_task' day=day month=today_year.month year=today_year.year%}">
+                            <div class="day past-day">{{ day }}</div>
+                        </a>
+
                     {% endif %}
                 {% endfor %}
             </div>
+
             <div class="calendar-navigation">
                 <a href="{% url 'change_month' month=today_year.month year=today_year.year sign='-'%}">
                     <button class="nav-button" id="prev-month">&lt;</button>
