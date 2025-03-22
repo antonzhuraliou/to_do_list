@@ -11,7 +11,7 @@ from .forms import TodoForm, EditForm
 
 
 def get_main_page(request):
-    today_date_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
+    today_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
     today_date = date.today()
 
     all_tasks = Task.objects.filter(created_at__date = today_date) # получаем все задания, у которых сегодняшняя дата
@@ -33,7 +33,7 @@ def get_main_page(request):
             Task.objects.create(description = form.cleaned_data['description'], created_at = date(today_date.year, today_date.month, today_date.day))
             return HttpResponseRedirect('/')
 
-    return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks, 'today_day': today_date_day})
+    return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks, 'today_day': today_day})
 
 
 def complete_task(request, id):
@@ -51,7 +51,7 @@ def delete_task(request, id):
 
 def edit_task(request, id):
     current_task = Task.objects.get(id = id)
-    model_name = current_task._meta.model.__name__
+    which_edit = 'Task'
     if request.method == 'POST':
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
@@ -60,7 +60,7 @@ def edit_task(request, id):
     else:
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form, 'model_name': model_name})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
 
 
 def task_history(request):
@@ -85,7 +85,7 @@ def restore_task_from_history(request, id):
 
 def edit_task_in_history(request, id):
     current_task = CompletedTask.objects.get(id = id)
-    model_name = current_task._meta.model.__name__
+    which_edit = 'History'
     if request.method == 'POST':
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
@@ -95,7 +95,7 @@ def edit_task_in_history(request, id):
     else:
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form, 'model_name': model_name})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
 
 
 def get_calendar(request):
