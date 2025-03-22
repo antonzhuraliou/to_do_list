@@ -11,12 +11,22 @@ from .forms import TodoForm, EditForm
 
 
 def get_main_page(request):
-    today_date_day = date.today().day
+    today_date_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
     today_date = date.today()
-    all_tasks = Task.objects.filter(created_at__date = today_date)
-    count_tasks = all_tasks.count()
-    form = TodoForm()
 
+    all_tasks = Task.objects.filter(created_at__date = today_date) # получаем все задания, у которых сегодняшняя дата
+    count_tasks = all_tasks.count() # высчитываем количество задач для счетчика
+
+    # Данный блок нужен для сохранения задач, которые не удалось выполнить в предыдущий день
+    not_completed_tasks = Task.objects.filter(created_at__date__lt=today_date)  # Получаем задачи, которые не выполнены в предыдyщие дни
+    # Проверяем есть ли такие задачи, если есть то добавляем их в выполненные, но со статусом False
+    if not_completed_tasks:
+        list_of_not_completed_tasks = [CompletedTask(description=task.description, created_at=task.created_at, is_completed= False) for task in not_completed_tasks]
+        CompletedTask.objects.bulk_create(list_of_not_completed_tasks) # Сохраняем сразу все задачи в бд
+        not_completed_tasks.delete() # Удаляем их из таблицы с задачи до выполнения
+
+    # Форма для создания задач для выполнения и после создания задачи перенаправляем на корневую папку
+    form = TodoForm()
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
