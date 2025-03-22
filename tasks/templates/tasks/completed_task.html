@@ -52,7 +52,7 @@
 
                 <span class="task-text"> {{ task.description }} </span>
                 <div>
-                    <a href="{% url 'history_edit' id=task.id %}" class="edit-icon"><i class="fas fa-pencil-alt edit-icon"></i></a>
+                    <a href="{% url 'today_edit' id=task.id day=date_to_add.2 month=date_to_add.3 year=date_to_add.0 %}" class="edit-icon"><i class="fas fa-pencil-alt edit-icon"></i></a>
                     <a href="{% url 'today_delete' id=task.id day=date_to_add.2 month=date_to_add.3 year=date_to_add.0 %}"><i class="far fa-trash-alt delete"></i></a>
                 </div>
             </li>
