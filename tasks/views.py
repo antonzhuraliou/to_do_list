@@ -138,3 +138,39 @@ def get_completed_tasks(request, day, month, year):
     date_to_add = (year, actual_month, day, month)
     completed_tasks = CompletedTask.objects.filter(created_at= date(year, month, day))
     return render(request,  'tasks/completed_task.html', context = {'completed_tasks': completed_tasks, 'date_to_add': date_to_add})
+
+
+def delete_task_from_day(request, id, day, month, year):
+    today_date = date.today()
+    if  day > today_date.day and month == today_date.month  or month > today_date.month or year > today_date.year:
+        task_to_delete = Task.objects.get(id=id)
+        task_to_delete.delete()
+        return HttpResponseRedirect(f'/task_for_day/{day}/{month}/{year}/')
+    else:
+        task_to_delete = CompletedTask.objects.get(id=id)
+        task_to_delete.delete()
+        return HttpResponseRedirect(f'/task_for_day_past/{day}/{month}/{year}/')
+
+def edit_task_calendar(request, id, day, month, year):
+    today_date = date.today()
+    which_edit = 'Calendar'
+    if day > today_date.day and month == today_date.month or month > today_date.month or year > today_date.year:
+        current_task = Task.objects.get(id=id)
+        if request.method == 'POST':
+            form = EditForm(request.POST, instance=current_task)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(f'/task_for_day/{day}/{month}/{year}/')
+        else:
+            form = EditForm(instance=current_task)
+    else:
+        current_task = CompletedTask.objects.get(id=id)
+        if request.method == 'POST':
+            form = EditForm(request.POST, instance=current_task)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(f'/task_for_day_past/{day}/{month}/{year}/')
+
+        form = EditForm(instance=current_task)
+
+    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
