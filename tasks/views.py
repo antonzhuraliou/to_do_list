@@ -64,8 +64,9 @@ def edit_task(request, id):
 
 
 def task_history(request):
-    all_tasks = CompletedTask.objects.all()
-    distinct_dates = CompletedTask.objects.values('created_at').distinct().order_by('-created_at', )
+    all_tasks = CompletedTask.objects.filter(is_completed=True)
+    distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by('-created_at', )
+
     return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': distinct_dates})
 
 
