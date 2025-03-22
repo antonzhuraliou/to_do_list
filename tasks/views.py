@@ -117,12 +117,12 @@ def get_priv_or_next_calendar(request, month, year, sign):
     actual_month = calendar.month_name[current_month_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
-                                                                  'today_year': current_month_date, 'actual_month': actual_month})
+                                                                  'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': today_compare})
 
 def calendar_task(request, day, month, year):
     all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
     actual_month = calendar.month_name[month]
-    date_to_add = (year, actual_month, day)
+    date_to_add = (year, actual_month, day, month)
     form = TodoForm()
     if request.method == 'POST':
         form = TodoForm(request.POST)
@@ -135,6 +135,6 @@ def calendar_task(request, day, month, year):
 
 def get_completed_tasks(request, day, month, year):
     actual_month = calendar.month_name[month]
-    date_to_add = (year, actual_month, day)
+    date_to_add = (year, actual_month, day, month)
     completed_tasks = CompletedTask.objects.filter(created_at= date(year, month, day))
     return render(request,  'tasks/completed_task.html', context = {'completed_tasks': completed_tasks, 'date_to_add': date_to_add})
