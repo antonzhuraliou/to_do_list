@@ -17,10 +17,12 @@
         <button type="submit" class="btn">Save changes</button>
       </div>
     </form>
-    {% if model_name == completedtask %}
+    {% if which_edit == 'History' %}
       <a href="{% url 'history' %}" class="btn cancel-btn">Cancel</a>
-    {% else %}
+    {% elif which_edit == 'Task'%}
       <a href="{% url 'main_page' %}" class="btn cancel-btn">Cancel</a>
+    {% else %}
+      <a href="{% url 'calendar' %}" class="btn cancel-btn">Cancel</a>
     {% endif %}
   </div>
 
