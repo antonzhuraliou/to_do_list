@@ -13,3 +13,5 @@ class EditForm(forms.ModelForm):
         fields = ['description']
 
 
+class SearchForm(forms.Form):
+    query = forms.CharField(widget=forms.TextInput(attrs={'class': "form-control search-input", 'placeholder': "Search"}))
