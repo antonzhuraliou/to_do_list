@@ -154,3 +154,26 @@ a:hover {
 .nav-button:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+.day-with-circle {
+    padding: 10px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1); /* Subtle background */
+    border-radius: 50%; /* Circular border */
+    box-sizing: border-box;
+    font-size: 16px;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust this for your desired circle size */
+    height: 40px; /* Ensure the height and width are equal for a perfect circle */
+    margin: auto;
+    border: 2px solid rgba(255, 255, 255, 0.4); /* More visible circular border */
+}
+
+.day-with-circle:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly lighter on hover */
+    cursor: pointer;
+    border-color: rgba(255, 255, 255, 0.6); /* Slightly stronger border color on hover */
+}
