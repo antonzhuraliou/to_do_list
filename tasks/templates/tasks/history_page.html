@@ -26,7 +26,16 @@
       <div class="text-center mb-4">
         <a href="{% url 'main_page' %}"><span class="back-to-tasks"><i class="fas fa-arrow-left"></i> Back to Todos</span></a>
       </div>
-      <br>
+      <div class="text-center mb-4">
+        <div class="search-container d-inline-flex align-items-center">
+          <form method="GET">
+            {{ form.query }}
+            <button class="btn search-btn">
+            <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
       {% for dt in date %}
       <div class="history-section">
         <h3 class="history-date">{{ dt.created_at }}</h3>
