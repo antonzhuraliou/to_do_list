@@ -7,8 +7,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .models import Task, CompletedTask
-from .forms import TodoForm, EditForm
+from .forms import TodoForm, EditForm, SearchForm
 
+from django.contrib.postgres.search import TrigramSimilarity
 
 def get_main_page(request):
     today_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
@@ -64,10 +65,21 @@ def edit_task(request, id):
 
 
 def task_history(request):
-    all_tasks = CompletedTask.objects.filter(is_completed=True)
-    distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by('-created_at', )
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            all_tasks = CompletedTask.objects.annotate(similarity=TrigramSimilarity('description', query)).filter(similarity__gt=0.2)
+            distinct_dates = all_tasks.filter(is_completed=True).values('created_at').distinct().order_by(
+                '-created_at', )
+    else:
+        all_tasks = CompletedTask.objects.filter(is_completed=True)
+        distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by('-created_at', )
 
-    return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': distinct_dates})
+    return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
 
 
 def delete_task_from_history(request, id):
