@@ -24,7 +24,7 @@
                 {% endfor %}
 
                 {% for day in days_in_month|my_range %}
-                    {% if day > today_compare.day and today_year.month == today_compare.month  or today_year.month > today_compare.month or today_year.year > today_compare.year %}
+                    {% if today_year.month > today_compare.month and today_year.year >= today_compare.year or day > today_compare.day and today_year.month == today_compare.month or today_year.year > today_compare.year %}
                         <a href="{% url 'day_task' day=day month=today_year.month year=today_year.year%}">
                             <div class="day">{{day}}</div>
                         </a>
