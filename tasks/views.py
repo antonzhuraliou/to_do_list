@@ -118,7 +118,7 @@ def get_calendar(request):
     actual_month = calendar.month_name[today_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
-                                                                  'today_year': today_date, 'actual_month': actual_month})
+                                                                  'today_year': today_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
 def get_priv_or_next_calendar(request, month, year, sign):
     if sign == '+':
@@ -129,7 +129,7 @@ def get_priv_or_next_calendar(request, month, year, sign):
     actual_month = calendar.month_name[current_month_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
-                                                                  'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': today_compare})
+                                                                  'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
 def calendar_task(request, day, month, year):
     all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
