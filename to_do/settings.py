@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasks',
-    'django.contrib.postgres'
+    'tasks'
 ]
 
 MIDDLEWARE = [
@@ -81,12 +80,8 @@ WSGI_APPLICATION = 'to_do.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo',
-        'USER': 'anton-zhurauliou',
-        'PASSWORD': '728272anton',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.getenv('DATABASE_NAME', 'db.sqlite3'),
     }
 }
 
