@@ -7,7 +7,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .models import Task, CompletedTask
-from .forms import TodoForm, EditForm
+from .forms import TodoForm, EditForm, SearchForm
+from django.contrib.postgres.search import TrigramSimilarity
 
 
 def get_main_page(request):
@@ -65,9 +66,26 @@ def edit_task(request, id):
 
 def task_history(request):
     all_tasks = CompletedTask.objects.filter(is_completed=True)
-    distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by('-created_at', )
+    distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by(
+        '-created_at', )
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            all_tasks = CompletedTask.objects.annotate(similarity=TrigramSimilarity('description', query)).filter(
+                similarity__gt=0.3)
+            distinct_dates = all_tasks.filter(is_completed=True).values('created_at').distinct().order_by(
+                '-created_at', )
+    else:
+        all_tasks = CompletedTask.objects.filter(is_completed=True)
+        distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by(
+            '-created_at', )
 
-    return render(request, 'tasks/history_page.html', context={'all_tasks': all_tasks, 'date': distinct_dates})
+    return render(request, 'tasks/history_page.html',
+                  context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
 
 
 def delete_task_from_history(request, id):
@@ -106,7 +124,7 @@ def get_calendar(request):
     actual_month = calendar.month_name[today_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
-                                                                  'today_year': today_date, 'actual_month': actual_month})
+                                                                  'today_year': today_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
 def get_priv_or_next_calendar(request, month, year, sign):
     if sign == '+':
@@ -117,7 +135,7 @@ def get_priv_or_next_calendar(request, month, year, sign):
     actual_month = calendar.month_name[current_month_date.month]
     week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     return render(request, 'tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
-                                                                  'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': today_compare})
+                                                                  'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
 def calendar_task(request, day, month, year):
     all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
