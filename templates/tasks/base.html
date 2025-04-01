@@ -32,7 +32,7 @@
     <div class="container">
       <div class="calendar-container">
         <div class="calendar-icon">
-          <a href=" {% url 'calendar' %} "><span class="calendar-day">{{today_day}}</span></a>
+          <a href=" {% url 'calendar_tasks:calendar' %} "><span class="calendar-day">{{today_day}}</span></a>
         </div>
         <p class="calendar-text">Calendar</p>
       </div>
@@ -58,7 +58,7 @@
       {% endblock %}
 
       <div class="text-center my-4">
-        <a href="{% url 'history' %}">
+        <a href="{% url 'tasks:history' %}">
           <button class="btn btn-light">Todo History</button>
         </a>
       </div>

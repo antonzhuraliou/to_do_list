@@ -25,16 +25,16 @@
 
                 {% for day in days_in_month|my_range %}
                     {% if day == today_compare.day and today_year.year == today_compare.year and today_year.month == today_compare.month %}
-                        <a href="{% url 'day_task' day=day month=today_year.month year=today_year.year%}">
+                        <a href="{% url 'calendar_tasks:day_task' day=day month=today_year.month year=today_year.year%}">
                             <div class="day-with-circle">{{day}}</div>
                         </a>
                     {% elif today_year.month > today_compare.month and today_year.year >= today_compare.year or day > today_compare.day and today_year.month == today_compare.month or today_year.year > today_compare.year %}
-                        <a href="{% url 'day_task' day=day month=today_year.month year=today_year.year%}">
+                        <a href="{% url 'calendar_tasks:day_task' day=day month=today_year.month year=today_year.year%}">
                             <div class="day">{{day}}</div>
                         </a>
 
                     {% else %}
-                        <a href="{% url 'completed_task' day=day month=today_year.month year=today_year.year%}">
+                        <a href="{% url 'calendar_tasks:completed_task' day=day month=today_year.month year=today_year.year%}">
                             <div class="day past-day">{{ day }}</div>
                         </a>
 
@@ -43,20 +43,20 @@
             </div>
 
             <div class="calendar-navigation">
-                <a href="{% url 'change_month' month=today_year.month year=today_year.year sign='-'%}">
+                <a href="{% url 'calendar_tasks:change_month' month=today_year.month year=today_year.year sign='-'%}">
                     <button class="nav-button" id="prev-month">&lt;</button>
                 </a>
-                <a href="{% url 'calendar' %}">
+                <a href="{% url 'calendar_tasks:calendar' %}">
                     <button class="nav-button" id="current-month">●</button>
                 </a>
-                <a href="{% url 'change_month' month=today_year.month year=today_year.year sign='+'%}">
+                <a href="{% url 'calendar_tasks:change_month' month=today_year.month year=today_year.year sign='+'%}">
                     <button class="nav-button" id="next-month">&gt;</button>
                 </a>
             </div>
         </div>
     </div>
     <div class="calendar-back-container">
-        <a href="{% url 'main_page' %}" class="calendar-back-to-tasks">
+        <a href="{% url 'tasks:main_page' %}" class="calendar-back-to-tasks">
             <i class="fas fa-arrow-left"></i> Back to Todos
         </a>
     </div>
