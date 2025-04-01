@@ -66,6 +66,7 @@ def edit_task_calendar(request, id, day, month, year):
     today_date = date.today()
     which_edit = 'Calendar'
     if day > today_date.day and month == today_date.month or month > today_date.month or year > today_date.year:
+        which_edit = 'Calendar_last'
         current_task = Task.objects.get(id=id)
         if request.method == 'POST':
             form = EditForm(request.POST, instance=current_task)
@@ -76,6 +77,7 @@ def edit_task_calendar(request, id, day, month, year):
             form = EditForm(instance=current_task)
     else:
         current_task = CompletedTask.objects.get(id=id)
+        which_edit = 'Calendar_future'
         if request.method == 'POST':
             form = EditForm(request.POST, instance=current_task)
             if form.is_valid():
@@ -84,7 +86,9 @@ def edit_task_calendar(request, id, day, month, year):
 
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit, 'date': date(year, month, day)})
+
+
 
 
 def show_welcome_page(request):
