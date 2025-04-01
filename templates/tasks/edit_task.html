@@ -21,8 +21,10 @@
       <a href="{% url 'tasks:history' %}" class="btn cancel-btn">Cancel</a>
     {% elif which_edit == 'Task'%}
       <a href="{% url 'tasks:main_page' %}" class="btn cancel-btn">Cancel</a>
+    {% elif which_edit == 'Calendar_last'%}
+      <a href="{% url 'calendar_tasks:day_task' day=date.day month=date.month year=date.year %}" class="btn cancel-btn">Cancel</a>
     {% else %}
-      <a href="{% url 'calendar_tasks:calendar' %}" class="btn cancel-btn">Cancel</a>
+      <a href="{% url 'calendar_tasks:completed_task' day=date.day month=date.month year=date.year %}" class="btn cancel-btn">Cancel</a>
     {% endif %}
   </div>
 
