@@ -109,16 +109,20 @@ def restore_task_from_history(request, id, query):
     return HttpResponseRedirect('/history')
 
 
-def edit_task_in_history(request, id):
+def edit_task_in_history(request, id, query):
     current_task = CompletedTask.objects.get(id = id)
-    which_edit = 'History'
+    which_edit = 'History_search' if query != '-' else 'History'
     if request.method == 'POST':
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
             form.save()
+            if query != '-':
+                url = reverse('tasks:search')
+                return HttpResponseRedirect(f'{url}?query={query}')
+
             return HttpResponseRedirect('/history')
 
     else:
         form = EditForm(instance=current_task)
 
-    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
+    return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit, 'query': query})
