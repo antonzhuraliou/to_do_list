@@ -23,12 +23,14 @@
   <body>
     <div class="container history-container text-light">
       <h2 class="text-center">Completed Tasks History</h2>
+      {% block back_function %}
       <div class="text-center mb-4">
         <a href="{% url 'tasks:main_page' %}"><span class="back-to-tasks"><i class="fas fa-arrow-left"></i> Back to Todos</span></a>
       </div>
+      {% endblock %}
       <div class="text-center mb-4">
         <div class="search-container d-inline-flex align-items-center">
-          <form method="GET">
+          <form method="GET" action="{% url 'tasks:search' %}">
             {{ form.query }}
             <button class="btn search-btn">
             <i class="fas fa-search"></i>
@@ -36,6 +38,7 @@
           </form>
         </div>
       </div>
+      {% block history %}
       {% for dt in date %}
       <div class="history-section">
         <h3 class="history-date">{{ dt.created_at }}</h3>
@@ -45,9 +48,9 @@
               <li class="list-group-item completed-task d-flex justify-content-between align-items-center">
                 <span class="task-text">{{ desc.description }}</span>
                 <div>
-                  <a href="{% url 'tasks:history_edit' id=desc.id %}"><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
-                  <a href="{% url 'tasks:history_delete' id=desc.id %}"><i class="far fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
-                  <a href="{% url 'tasks:history_restore' id=desc.id %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'tasks:history_edit' id=desc.id query='-' %}"><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'tasks:history_delete' id=desc.id query='-' %}"><i class="far fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'tasks:history_restore' id=desc.id query='-' %}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
                 </div>
               </li>
             {% endif %}
@@ -55,6 +58,7 @@
         </ul>
       </div>
       {% endfor %}
+      {% endblock %}
     </div>
   </body>
 </html>
