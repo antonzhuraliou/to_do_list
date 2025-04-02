@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks',
     'calendar_tasks',
+    'accounts',
     'django.contrib.postgres',
 ]
 
