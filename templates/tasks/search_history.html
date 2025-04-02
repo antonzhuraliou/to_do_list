@@ -1,0 +1,30 @@
+
+{% extends 'tasks/history_page.html' %}
+
+{% block back_function %}
+  <div class="text-center mb-4">
+    <a href="{% url 'tasks:history' %}"><span class="back-to-tasks"><i class="fas fa-arrow-left"></i>Full history</span></a>
+  </div>
+{% endblock %}
+
+{% block history %}
+    {% for dt in date %}
+      <div class="history-section">
+        <h3 class="history-date">{{ dt.created_at }}</h3>
+        <ul class="list-group history-list">
+          {% for desc in all_tasks %}
+            {% if desc.created_at == dt.created_at %}
+              <li class="list-group-item completed-task d-flex justify-content-between align-items-center">
+                <span class="task-text">{{ desc.description }}</span>
+                <div>
+                  <a href="{% url 'tasks:history_edit' id=desc.id query=query %}"><i class="fas fa-pencil-alt edit-icon" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'tasks:history_delete' id=desc.id query=query%}"><i class="far fa-trash-alt delete" data-id="{{ desc.id }}"></i></a>
+                  <a href="{% url 'tasks:history_restore' id=desc.id query=query%}"><i class="fas fa-undo restore-icon" data-id="{{ desc.id }}"></i></a>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+{% endblock %}
