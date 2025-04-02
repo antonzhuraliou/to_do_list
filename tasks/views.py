@@ -5,11 +5,12 @@ from typing import Any
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Task, CompletedTask
 from .forms import TodoForm, EditForm, SearchForm
 from django.contrib.postgres.search import TrigramSimilarity
-
+from django.views.decorators.http import require_GET
 
 def get_main_page(request):
     today_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
@@ -66,23 +67,27 @@ def edit_task(request, id):
 
 def task_history(request):
     all_tasks = CompletedTask.objects.filter(is_completed=True)
+    form = SearchForm()
     distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by(
         '-created_at', )
-    form = SearchForm()
-    query = None
-    results = []
-    if 'query' in request.GET:
-        form = SearchForm(request.GET)
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            all_tasks = CompletedTask.objects.annotate(similarity=TrigramSimilarity('description', query)).filter(
-                similarity__gt=0.3)
-            distinct_dates = all_tasks.filter(is_completed=True).values('created_at').distinct().order_by(
+    return render(request, 'tasks/history_page.html',
+                  context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
+
+@require_GET
+def search_history(request):
+    form = SearchForm(request.GET)
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        all_tasks = CompletedTask.objects.annotate(similarity=TrigramSimilarity('description', query)).filter(
+                similarity__gt=0.2)
+        distinct_dates = all_tasks.filter(is_completed=True).values('created_at').distinct().order_by(
                 '-created_at', )
     else:
-        all_tasks = CompletedTask.objects.filter(is_completed=True)
-        distinct_dates = CompletedTask.objects.filter(is_completed=True).values('created_at').distinct().order_by(
-            '-created_at', )
+        all_tasks = None
+        distinct_dates = None
+        query = None
+    return render(request, 'tasks/search_history.html',
+                  context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form, 'query': query})
 
     return render(request, 'tasks/history_page.html',
                   context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
