@@ -89,7 +89,3 @@ def edit_task_calendar(request, id, day, month, year):
     return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit, 'date': date(year, month, day)})
 
 
-
-
-def show_welcome_page(request):
-    return render(request, 'calendar_tasks/welcome_page.html')
