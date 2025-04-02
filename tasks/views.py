@@ -89,13 +89,13 @@ def search_history(request):
     return render(request, 'tasks/search_history.html',
                   context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form, 'query': query})
 
-    return render(request, 'tasks/history_page.html',
-                  context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
 
-
-def delete_task_from_history(request, id):
+def delete_task_from_history(request, id, query):
     task_to_delete = CompletedTask.objects.get(id = id)
     task_to_delete.delete()
+    if query:
+        url = reverse('tasks:search')
+        return HttpResponseRedirect(f'{url}?query={query}')
     return HttpResponseRedirect('/history')
 
 
