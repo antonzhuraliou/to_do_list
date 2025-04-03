@@ -3,7 +3,7 @@ import calendar
 from dateutil.relativedelta import relativedelta
 from typing import Any
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -33,7 +33,7 @@ def get_main_page(request):
         form = TodoForm(request.POST)
         if form.is_valid():
             Task.objects.create(description = form.cleaned_data['description'], created_at = date(today_date.year, today_date.month, today_date.day))
-            return HttpResponseRedirect('/')
+            return redirect('tasks:main_page')
 
     return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks, 'today_day': today_day})
 
@@ -42,13 +42,13 @@ def complete_task(request, id):
     task_to_delete = Task.objects.get(id=id)
     CompletedTask.objects.create(description = task_to_delete.description, created_at = datetime.now())
     task_to_delete.delete()
-    return HttpResponseRedirect('/')
+    return redirect('tasks:main_page')
 
 
 def delete_task(request, id):
     task_to_delete = Task.objects.get(id = id)
     task_to_delete.delete()
-    return HttpResponseRedirect('/')
+    return redirect('tasks:main_page')
 
 
 def edit_task(request, id):
@@ -58,7 +58,8 @@ def edit_task(request, id):
         form = EditForm(request.POST, instance=current_task)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+
+            return redirect('tasks:main_page')
     else:
         form = EditForm(instance=current_task)
 
