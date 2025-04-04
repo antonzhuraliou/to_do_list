@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'calendar_tasks',
     'accounts',
     'django.contrib.postgres',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL = '/tasks/'
+LOGOUT_REDIRECT_URL = "/"
