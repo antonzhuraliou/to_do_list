@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | TaskMaster</title>
+    <link href="{% static 'css/welcome_page.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="logo">TaskMaster</div>
+        <div class="tagline">Achieve more, stress less. Plan your day efficiently!</div>
+        <div class="button-container">
+            <a href="{% url 'accounts:login' %}">
+                <button class="btn btn-login">Log In</button>
+            </a>
+            <button class="btn btn-signup">Sign Up</button>
+        </div>
+    </div>
+</body>
+</html>

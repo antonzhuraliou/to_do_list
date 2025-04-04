@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url("{% static 'fonts/JosefinSans-Regular.woff2' %}") format('woff2'),
+         url("{% static 'fonts/JosefinSans-Regular.woff' %}") format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+body {
+    background: #352f5b;
+    font-family: "Josefin Sans", sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+        }
+.welcome-container {
+    text-align: center;
+    max-width: 500px;
+}
+.logo {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.tagline {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+        }
+.btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-login {
+    background: #423a6f;
+    color: white;
+}
+.btn-signup {
+    background: white;
+    color: #423a6f;
+}
+.btn:hover {
+    opacity: 0.8;
+}
