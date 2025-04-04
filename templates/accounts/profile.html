@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <div class="profile-layout">
+        <div class="sidebar-minimal">
+            <div class="sidebar-links">
+                <a href="#" class="sidebar-link"><i class="fas fa-arrow-left"></i> Back to main site</a>
+                <a href="#" class="sidebar-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <h1>Your profile</h1>
+
+            <div class="profile-section personal-info">
+                <div class="info-row">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">Anton</div>
+                    <a href="#" class="action-button">Change</a>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">anton.zhurauluou@gmail.com</div>
+                    <a href="#" class="action-button">Change</a>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2>Password</h2>
+                    <a href="#" class="action-button">Change</a>
+                </div>
+                <p class="section-description">Change your account password.</p>
+            </div>
+
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2>Contact support</h2>
+                    <a href="#" class="action-button">Email us</a>
+                </div>
+                <p class="section-description">Reach us for account, billing, or paid service inquiries.</p>
+            </div>
+
+
+            <div class="profile-section delete-section">
+                <div class="section-header">
+                    <h2>Delete account</h2>
+                    <a href="#" class="action-button delete">Delete</a>
+                </div>
+                <p class="section-description">Permanently delete your account, licenses, and subscriptions. You will be asked for confirmation before deletion proceeds.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
