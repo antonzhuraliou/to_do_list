@@ -30,12 +30,32 @@
 
   <body>
     <div class="container">
-      <div class="calendar-container">
+       <div class="calendar-container">
         <div class="calendar-icon">
           <a href=" {% url 'calendar_tasks:calendar' %} "><span class="calendar-day">{{today_day}}</span></a>
         </div>
         <p class="calendar-text">Calendar</p>
       </div>
+
+     <div class="profile-container">
+        <div class="profile-block">
+          <a href="{% url 'accounts:profile' %}" class="profile-icon">
+            <i class="fas fa-user"></i>
+          </a>
+        <div class="profile-text">Profile</div>
+        </div>
+
+      <div class="logout-block">
+         <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <a href="#" class="logout-icon" onclick="parentNode.submit();">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </form>
+        <div class="logout-text">Log out</div>
+      </div>
+    </div>
+
       <header class="text-center text-light my-4">
         <h1 class="mb-4">Todo List</h1>
 

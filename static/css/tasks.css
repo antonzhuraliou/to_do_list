@@ -147,13 +147,12 @@ a:hover {
 .calendar-container {
     position: absolute;
     top: 30px;
-    right: 650px;
+    left: 720px; /* Было right: 650px; */
     display: flex;
     flex-direction: column;
-    text-align: center; /* Выравнивает текст по центру */
-    gap: 5px; /* Отступ между иконкой и текстом */
+    text-align: center;
+    gap: 5px;
 }
-
 .calendar-icon {
     width: 45px;
     height: 45px;
@@ -231,4 +230,50 @@ a:hover {
 .check-icon2 {
     color: #423a6f; /* Цвет крестика */
     font-size: 16px;
+}
+.profile-container {
+    position: absolute;
+    top: 30px;
+    right: 650px; /* Было left: 650px; + ошибка в правом отступе */
+    display: flex;
+    gap: 20px;
+    text-align: center;
+}
+
+.profile-icon, .logout-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #423a6f;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-direction: column; /* Иконка и текст по вертикали */
+    text-align: center;
+
+}
+
+.profile-icon:hover, .logout-icon:hover {
+    background-color: #5a4f9a;
+    transform: translateY(-2px);
+}
+
+.profile-block,
+.logout-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px; /* расстояние между иконкой и текстом */
+}
+
+.profile-text,
+.logout-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
 }

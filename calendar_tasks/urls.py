@@ -10,5 +10,4 @@ urlpatterns = [
     path('change_month/<int:month>/<int:year>/<str:sign>', views.get_priv_or_next_calendar, name='change_month'),
     path('delete_task_for_day/<int:id>/<int:day>/<int:month>/<int:year>/', views.delete_task_from_day, name='today_delete'),
     path('edit_task_for_day/<int:id>/<int:day>/<int:month>/<int:year>/', views.edit_task_calendar, name = 'today_edit'),
-    path('welcome_page', views.show_welcome_page, name='welcome'),
 ]
