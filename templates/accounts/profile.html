@@ -13,8 +13,11 @@
     <div class="profile-layout">
         <div class="sidebar-minimal">
             <div class="sidebar-links">
-                <a href="#" class="sidebar-link"><i class="fas fa-arrow-left"></i> Back to main site</a>
-                <a href="#" class="sidebar-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                <a href="{% url 'tasks:main_page' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Back to main site</a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <a href="#" class="sidebar-link" onclick="parentNode.submit();"><i class="fas fa-sign-out-alt" ></i> Log out</a>
+                </form>
             </div>
         </div>
 
