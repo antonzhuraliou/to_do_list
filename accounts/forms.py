@@ -26,3 +26,48 @@ class LoginForm(forms.Form):
         ),
     )
 
+class RegisterForm(UserCreationForm):
+    username = forms.CharField(
+        label="Username",
+        widget=forms.TextInput(
+            attrs={
+                "id": "username",
+                "name": "username",
+                "placeholder": "Введите username",
+                "required": True,
+            }
+        ),
+    )
+    email = forms.EmailField(
+        label="Email",
+        widget=forms.TextInput(
+            attrs={
+                "id": "email",
+                "name": "email",
+                "placeholder": "Введите email",
+                "required": True,
+            }
+        ),
+    )
+    password1 = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs={
+                "id": "password",
+                "name": "password",
+                "placeholder": "Введите password",
+                "required": True,
+            }
+        ),
+    )
+    password2 = forms.CharField(
+        label="Repeat password",
+        widget=forms.PasswordInput(
+            attrs={
+                "id": "repeat password",
+                "name": "repeat password",
+                "placeholder": "Введите password",
+                "required": True,
+            }
+        ),
+    )
