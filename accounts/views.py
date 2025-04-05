@@ -43,7 +43,7 @@ def get_register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('accounts:login')
+            return render(request, 'accounts/success_registration.html')
     else:
         form = RegisterForm()
 
