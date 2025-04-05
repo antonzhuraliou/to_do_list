@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+ {% load static %}
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Create Account</title>
+     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'css/register.css' %}">
+ </head>
+ <body>
+     <div class="register-container">
+         <div class="register-box">
+ <!--            <img src="image.png" alt="Logo" class="logo">-->
+             <h2>Create an account</h2>
+ <!--            <p class="description">-->
+ <!--                An account allows you to purchase licenses and access add-on services. You don’t need an account to use the app.-->
+ <!--            </p>-->
+             <form method="POST" action="{% url 'accounts:register' %}">
+                 {{ form  }}
+                 {% csrf_token %}
+                 <button type="submit" class="btn">Sign up</button>
+             </form>
+             <p class="login-link">Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
+         </div>
+     </div>
+ </body>
+ </html>
