@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def get_welcome_page(request):
@@ -42,7 +44,11 @@ def get_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
+            user = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             form.save()
+            send_mail(subject='Welcome! Your account has been created',message=f'Hi {user},\nThank you for registering with us! Your account has been successfully created. We are happy to have you on board!',
+                      from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[email])
             return render(request, 'accounts/success_registration.html')
     else:
         form = RegisterForm()
