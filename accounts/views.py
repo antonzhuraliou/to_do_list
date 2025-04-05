@@ -1,4 +1,4 @@
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -37,3 +37,14 @@ def custom_login_view(request):
 
 def get_profile(request):
     return render(request, 'accounts/profile.html')
+
+def get_registrat(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:login')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'accounts/register.html', {'form': form})
