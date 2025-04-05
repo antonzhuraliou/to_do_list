@@ -6,7 +6,10 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from tasks.forms import TodoForm, EditForm
 from tasks.models import Task, CompletedTask
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def get_calendar(request):
     # Получаем количество дней в текущем месяце и передаем в контекст
     # Получаем цифровое значение первого дня в месяце для правильной генерации расположения календаря
@@ -17,6 +20,8 @@ def get_calendar(request):
     return render(request, 'calendar_tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
                                                                   'today_year': today_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
+
+@login_required
 def get_priv_or_next_calendar(request, month, year, sign = ''):
     if sign == '+':
         current_month_date = date(year, month, 1) + relativedelta(months=1)
@@ -30,6 +35,8 @@ def get_priv_or_next_calendar(request, month, year, sign = ''):
     return render(request, 'calendar_tasks/calendar_page.html', context = {'days_in_month': days_in_month, 'empty_days': first_day_number, 'week_days':week_days,
                                                                   'today_year': current_month_date, 'actual_month': actual_month, 'today_compare': date.today()})
 
+
+@login_required
 def calendar_task(request, day, month, year):
     all_tasks = Task.objects.filter(created_at__date = date(year, month, day))
     actual_month = calendar.month_name[month]
@@ -44,6 +51,7 @@ def calendar_task(request, day, month, year):
     return render(request, 'calendar_tasks/day_task_page.html', context = {'form': form, 'date_to_add':date_to_add, 'all_tasks': all_tasks, 'month': month})
 
 
+@login_required
 def get_completed_tasks(request, day, month, year):
     actual_month = calendar.month_name[month]
     date_to_add = (year, actual_month, day, month)
@@ -51,6 +59,7 @@ def get_completed_tasks(request, day, month, year):
     return render(request,  'calendar_tasks/completed_task.html', context = {'completed_tasks': completed_tasks, 'date_to_add': date_to_add, 'month': month})
 
 
+@login_required
 def delete_task_from_day(request, id, day, month, year):
     today_date = date.today()
     if  day > today_date.day and month == today_date.month  or month > today_date.month or year > today_date.year:
@@ -62,6 +71,8 @@ def delete_task_from_day(request, id, day, month, year):
         task_to_delete.delete()
         return HttpResponseRedirect(f'/calendar/task_for_day_past/{day}/{month}/{year}/')
 
+
+@login_required
 def edit_task_calendar(request, id, day, month, year):
     today_date = date.today()
     which_edit = 'Calendar'

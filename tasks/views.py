@@ -111,9 +111,9 @@ def delete_task_from_history(request, id, query):
 
 @login_required
 def restore_task_from_history(request, id, query):
-    task_to_restore = CompletedTask.objects.get(id=id)
-    Task.objects.create(description = task_to_restore.description, created_at = date.today())
+    user_id = request.user.id
     task_to_restore = CompletedTask.objects.get(id=id, user_id=user_id)
+    Task.objects.create(description = task_to_restore.description, created_at = date.today(), user_id=user_id)
     task_to_restore.delete()
     if query:
         url = reverse('tasks:search')
