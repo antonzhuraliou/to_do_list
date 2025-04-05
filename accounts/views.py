@@ -38,7 +38,7 @@ def custom_login_view(request):
 def get_profile(request):
     return render(request, 'accounts/profile.html')
 
-def get_registrat(request):
+def get_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
