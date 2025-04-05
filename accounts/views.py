@@ -54,3 +54,4 @@ def get_register(request):
         form = RegisterForm()
 
     return render(request, 'accounts/register.html', {'form': form})
+

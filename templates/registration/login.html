@@ -15,7 +15,7 @@
             <form method = 'POST' action="{% url 'accounts:login' %}">
                     {{ form }}
                 <div class="forgot-password">
-                    <a href="#">Forgot password?</a>
+                    <a href="{% url 'password_reset' %}">Forgot password?</a>
                 </div>
                 {% csrf_token %}
                 <button type="submit" class="btn">Sign in</button>
