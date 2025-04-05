@@ -11,7 +11,9 @@ from .models import Task, CompletedTask
 from .forms import TodoForm, EditForm, SearchForm
 from django.contrib.postgres.search import TrigramSimilarity
 from django.views.decorators.http import require_GET
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def get_main_page(request):
     today_day = date.today().day # Используется для указания дня у иконки Календаря на главном меню
     today_date = date.today()
@@ -37,20 +39,20 @@ def get_main_page(request):
 
     return render(request, 'tasks/cur_tasks.html', context = {'all_tasks': all_tasks, 'form': form, 'count_tasks': count_tasks, 'today_day': today_day})
 
-
+@login_required
 def complete_task(request, id):
     task_to_delete = Task.objects.get(id=id)
     CompletedTask.objects.create(description = task_to_delete.description, created_at = datetime.now())
     task_to_delete.delete()
     return redirect('tasks:main_page')
 
-
+@login_required
 def delete_task(request, id):
     task_to_delete = Task.objects.get(id = id)
     task_to_delete.delete()
     return redirect('tasks:main_page')
 
-
+@login_required
 def edit_task(request, id):
     current_task = Task.objects.get(id = id)
     which_edit = 'Task'
@@ -65,7 +67,7 @@ def edit_task(request, id):
 
     return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit})
 
-
+@login_required
 def task_history(request):
     all_tasks = CompletedTask.objects.filter(is_completed=True)
     form = SearchForm()
@@ -74,6 +76,7 @@ def task_history(request):
     return render(request, 'tasks/history_page.html',
                   context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form})
 
+@login_required
 @require_GET
 def search_history(request):
     form = SearchForm(request.GET)
@@ -90,7 +93,7 @@ def search_history(request):
     return render(request, 'tasks/search_history.html',
                   context={'all_tasks': all_tasks, 'date': distinct_dates, 'form': form, 'query': query})
 
-
+@login_required
 def delete_task_from_history(request, id, query):
     task_to_delete = CompletedTask.objects.get(id = id)
     task_to_delete.delete()
@@ -99,7 +102,7 @@ def delete_task_from_history(request, id, query):
         return HttpResponseRedirect(f'{url}?query={query}')
     return HttpResponseRedirect('/history')
 
-
+@login_required
 def restore_task_from_history(request, id, query):
     task_to_restore = CompletedTask.objects.get(id=id)
     Task.objects.create(description = task_to_restore.description, created_at = date.today())
@@ -109,7 +112,7 @@ def restore_task_from_history(request, id, query):
         return HttpResponseRedirect(f'{url}?query={query}')
     return HttpResponseRedirect('/history')
 
-
+@login_required
 def edit_task_in_history(request, id, query):
     current_task = CompletedTask.objects.get(id = id)
     which_edit = 'History_search' if query != '-' else 'History'
