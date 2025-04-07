@@ -10,11 +10,16 @@
  <body>
      <div class="register-container">
          <div class="register-box">
- <!--            <img src="image.png" alt="Logo" class="logo">-->
              <h2>Create an account</h2>
- <!--            <p class="description">-->
- <!--                An account allows you to purchase licenses and access add-on services. You don’t need an account to use the app.-->
- <!--            </p>-->
+             {% if form.errors %}
+                <div class="error-box">
+                    {% for key, value in form.errors.items %}
+                        {% for error in value %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
              <form method="POST" action="{% url 'accounts:register' %}">
                  {{ form  }}
                  {% csrf_token %}
