@@ -5,35 +5,35 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.contrib.auth.decorators import login_required
 
 def get_welcome_page(request):
     return render(request, 'accounts/welcome_page.html')
 
 
 def custom_login_view(request):
-    form = LoginForm
     if request.method == "POST":
         form = LoginForm(request.POST)
-        email = request.POST.get("email")
-        password = request.POST.get("password")
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
 
-        try:
-            user_obj = User.objects.get(email=email)
-        except User.DoesNotExist:
-            user_obj = None
+            try:
+                user_obj = User.objects.get(email=email)
+            except User.DoesNotExist:
+                form.add_error('email', 'No user found with this email.')
+                return render(request, "registration/login.html", {'form': form})
 
-        if user_obj:
             user = authenticate(request, username=user_obj.username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect("tasks:main_page")
             else:
-                error = "Неверный пароль"
-        else:
-            error = "Пользователь с таким email не найден"
+                form.add_error('password', 'Enter a valid password')
+                return render(request, "registration/login.html", {'form': form})
+    else:
+        form = LoginForm()
 
-        return render(request, "registration/login.html", {"error": error, 'form': form})
     return render(request, "registration/login.html", {'form': form})
 
 

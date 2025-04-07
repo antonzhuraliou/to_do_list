@@ -10,7 +10,15 @@
 <body>
     <div class="login-container">
         <div class="login-box">
-<!--            <img src="logo.png" alt="Logo" class="logo">-->
+            {% if form.errors %}
+                <div class="error-box">
+                    {% for key, value in form.errors.items %}
+                        {% for error in value %}
+                    <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
             <h2>Sign in to your account</h2>
             <form method = 'POST' action="{% url 'accounts:login' %}">
                     {{ form }}
