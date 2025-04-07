@@ -37,8 +37,12 @@ def custom_login_view(request):
     return render(request, "registration/login.html", {'form': form})
 
 
+@login_required
 def get_profile(request):
-    return render(request, 'accounts/profile.html')
+    user_email = request.user.email
+    usermame = request.user.username
+    return render(request, 'accounts/profile.html', context={'email':user_email, 'name': usermame})
+
 
 def get_register(request):
     if request.method == 'POST':
