@@ -8,6 +8,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 def get_welcome_page(request):
+    if request.user.is_authenticated:
+        return redirect("tasks:main_page")
     return render(request, 'accounts/welcome_page.html')
 
 
