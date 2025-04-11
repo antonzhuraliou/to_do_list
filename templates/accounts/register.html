@@ -3,11 +3,12 @@
  <html lang="en">
  <head>
      <meta charset="UTF-8">
-     <title>Create Account</title>
+     {% block title %}<title>Create Account</title>{% endblock %}
      <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="{% static 'css/register.css' %}">
+     {% block css %}<link rel="stylesheet" href="{% static 'css/register.css' %}">{% endblock %}
  </head>
  <body>
+ {% block content %}
      <div class="register-container">
          <div class="register-box">
              <h2>Create an account</h2>
@@ -28,5 +29,6 @@
              <p class="login-link">Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
          </div>
      </div>
+ {% endblock %}
  </body>
  </html>
