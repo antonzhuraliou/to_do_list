@@ -2,7 +2,7 @@ from datetime import datetime, date
 import calendar
 from dateutil.relativedelta import relativedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from tasks.forms import TodoForm, EditForm
 from tasks.models import Task, CompletedTask
@@ -79,26 +79,27 @@ def delete_task_from_day(request, id, day, month, year):
 def edit_task_calendar(request, id, day, month, year):
     today_date = date.today()
     user_id = request.user.id
-    if day > today_date.day and month == today_date.month or month > today_date.month or year > today_date.year:
-        which_edit = 'Calendar_last'
-        current_task = Task.objects.get(id=id, user_id=user_id)
-        if request.method == 'POST':
-            form = EditForm(request.POST, instance=current_task)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(f'/calendar/task_for_day/{day}/{month}/{year}/')
-        else:
-            form = EditForm(instance=current_task)
-    else:
-        current_task = CompletedTask.objects.get(id=id, user_id=user_id)
-        which_edit = 'Calendar_future'
-        if request.method == 'POST':
-            form = EditForm(request.POST, instance=current_task)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(f'/calendar/task_for_day_past/{day}/{month}/{year}/')
 
-        form = EditForm(instance=current_task)
+    is_future_task = day > today_date.day and month == today_date.month or month > today_date.month or year > today_date.year
+    if is_future_task:
+        which_edit = 'Calendar_last'
+        task_model = Task
+        redirect_url = reverse('calendar_tasks:day_task', kwargs={'day':day,'month': month, 'year': year})
+
+    else:
+        which_edit = 'Calendar_future'
+        task_model = CompletedTask
+        redirect_url = reverse('calendar_tasks:completed_task', kwargs={'day':day,'month': month, 'year': year})
+
+    current_task = task_model.objects.get(id=id, user_id=user_id)
+
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=current_task)
+        if form.is_valid():
+            form.save()
+            return redirect(redirect_url)
+    else:
+         form = EditForm(instance=current_task)
 
     return render(request, 'tasks/edit_task.html', {'form': form, 'which_edit': which_edit, 'date': date(year, month, day)})
 
