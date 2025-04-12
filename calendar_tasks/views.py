@@ -3,7 +3,6 @@ import calendar
 from dateutil.relativedelta import relativedelta
 
 from django.shortcuts import render, reverse, redirect
-from django.http import HttpResponseRedirect
 from tasks.forms import TodoForm, EditForm
 from tasks.models import Task, CompletedTask
 from django.contrib.auth.decorators import login_required
@@ -47,7 +46,7 @@ def calendar_task(request, day, month, year):
         form = TodoForm(request.POST)
         if form.is_valid():
             Task.objects.create(description=form.cleaned_data['description'], created_at = date(year, month, day), user_id=user_id)
-            return HttpResponseRedirect(f'/calendar/task_for_day/{day}/{month}/{year}/')
+            return redirect(reverse('calendar_tasks:day_task', kwargs={'day':day,'month': month, 'year': year}))
 
     return render(request, 'calendar_tasks/day_task_page.html', context = {'form': form, 'date_to_add':date_to_add, 'all_tasks': all_tasks, 'month': month})
 
