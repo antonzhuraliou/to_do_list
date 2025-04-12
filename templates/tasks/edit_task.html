@@ -20,7 +20,7 @@
     {% if which_edit == 'History' %}
       <a href="{% url 'tasks:history' %}" class="btn cancel-btn">Cancel</a>
     {% elif which_edit == 'History_search' %}
-      <a href="/search/?query={{query}}" class="btn cancel-btn">Cancel</a>
+      <a href="{% url 'tasks:search' %}?query={{query}}" class="btn cancel-btn">Cancel</a>
     {% elif which_edit == 'Task'%}
       <a href="{% url 'tasks:main_page' %}" class="btn cancel-btn">Cancel</a>
     {% elif which_edit == 'Calendar_last'%}

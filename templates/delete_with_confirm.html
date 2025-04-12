@@ -16,7 +16,11 @@
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            <a href="{% url url_page %}" class="btn btn-secondary">Cancel</a>
+            {% if query != '-' %}
+                <a href="{% url 'tasks:search' %}?query={{query}}" class="btn btn-secondary">Cancel</a>
+            {% else %}
+                <a href="{% url url_page %}" class="btn btn-secondary">Cancel</a>
+            {% endif %}
         </div>
     </div>
 </body>

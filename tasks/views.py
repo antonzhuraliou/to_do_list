@@ -55,7 +55,7 @@ def delete_task(request, id):
     if request.method == 'POST':
         task_to_delete.delete()
         return redirect('tasks:main_page')
-    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:main_page'})
+    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:main_page', 'query': '-'})
 
 @login_required
 def edit_task(request, id):
@@ -111,7 +111,7 @@ def delete_task_from_history(request, id, query):
             url = reverse('tasks:search')
             return HttpResponseRedirect(f'{url}?query={query}')
         return redirect('tasks:history')
-    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:history'})
+    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:history', 'query': query})
 
 @login_required
 def restore_task_from_history(request, id, query):
