@@ -1,0 +1,64 @@
+body {
+            font-family: Arial, sans-serif;
+            background-color: #352f5b; /* Цвет фона в стиле вашего проекта */
+            margin: 0;
+            padding: 0;
+        }
+
+        .confirm-delete-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .confirm-delete-container h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #423a6f; /* Темный оттенок, который гармонирует с фоном */
+        }
+
+        .confirm-delete-container p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c; /* Красный цвет для кнопки удаления */
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b; /* Более темный красный при наведении */
+        }
+
+        .btn-secondary {
+            background-color: #6a5acd; /* Цвет для кнопки "Отмена" в стиле вашего проекта */
+            color: white;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7a65c1; /* Более светлый оттенок при наведении */
+        }
