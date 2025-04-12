@@ -65,14 +65,24 @@ def get_completed_tasks(request, day, month, year):
 def delete_task_from_day(request, id, day, month, year):
     today_date = date.today()
     user_id = request.user.id
-    if  day > today_date.day and month == today_date.month  or month > today_date.month or year > today_date.year:
-        task_to_delete = Task.objects.get(id=id, user_id=user_id)
-        task_to_delete.delete()
-        return HttpResponseRedirect(f'/calendar/task_for_day/{day}/{month}/{year}/')
+
+    is_future_task = day > today_date.day and month == today_date.month  or month > today_date.month or year > today_date.year
+    if is_future_task:
+        task_model = Task
+        redirect_url = reverse('calendar_tasks:day_task', kwargs={'day':day,'month': month, 'year': year})
     else:
-        task_to_delete = CompletedTask.objects.get(id=id, user_id=user_id)
+        task_model = CompletedTask
+        redirect_url = reverse('calendar_tasks:completed_task', kwargs={'day':day,'month': month, 'year': year})
+
+    task_to_delete = task_model.objects.get(id=id, user_id=user_id)
+    if request.method == 'POST':
         task_to_delete.delete()
-        return HttpResponseRedirect(f'/calendar/task_for_day_past/{day}/{month}/{year}/')
+        return redirect(redirect_url)
+
+    url_page = 'calendar_tasks:day_task' if is_future_task else 'calendar_tasks:completed_task'
+    context = {'url_page': url_page, 'query': '+', 'day':day,'month': month, 'year': year}
+
+    return render(request, 'delete_with_confirm.html', context=context)
 
 
 @login_required
@@ -85,7 +95,6 @@ def edit_task_calendar(request, id, day, month, year):
         which_edit = 'Calendar_last'
         task_model = Task
         redirect_url = reverse('calendar_tasks:day_task', kwargs={'day':day,'month': month, 'year': year})
-
     else:
         which_edit = 'Calendar_future'
         task_model = CompletedTask
