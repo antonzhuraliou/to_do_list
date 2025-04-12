@@ -52,8 +52,10 @@ def complete_task(request, id):
 def delete_task(request, id):
     user_id = request.user.id
     task_to_delete = Task.objects.get(id = id, user_id = user_id)
-    task_to_delete.delete()
-    return redirect('tasks:main_page')
+    if request.method == 'POST':
+        task_to_delete.delete()
+        return redirect('tasks:main_page')
+    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:main_page'})
 
 @login_required
 def edit_task(request, id):
@@ -102,12 +104,14 @@ def search_history(request):
 @login_required
 def delete_task_from_history(request, id, query):
     user_id = request.user.id
-    task_to_delete = CompletedTask.objects.get(id = id, user_id=user_id)
-    task_to_delete.delete()
-    if query:
-        url = reverse('tasks:search')
-        return HttpResponseRedirect(f'{url}?query={query}')
-    return HttpResponseRedirect('/history')
+    task_to_delete = CompletedTask.objects.get(id=id, user_id=user_id)
+    if request.method == 'POST':
+        task_to_delete.delete()
+        if query != '-':
+            url = reverse('tasks:search')
+            return HttpResponseRedirect(f'{url}?query={query}')
+        return redirect('tasks:history')
+    return render(request, 'delete_with_confirm.html', context = {'url_page': 'tasks:history'})
 
 @login_required
 def restore_task_from_history(request, id, query):
@@ -115,10 +119,10 @@ def restore_task_from_history(request, id, query):
     task_to_restore = CompletedTask.objects.get(id=id, user_id=user_id)
     Task.objects.create(description = task_to_restore.description, created_at = date.today(), user_id=user_id)
     task_to_restore.delete()
-    if query:
+    if query != '-':
         url = reverse('tasks:search')
         return HttpResponseRedirect(f'{url}?query={query}')
-    return HttpResponseRedirect('/history')
+    return redirect('tasks:history')
 
 @login_required
 def edit_task_in_history(request, id, query):
@@ -132,9 +136,7 @@ def edit_task_in_history(request, id, query):
             if query != '-':
                 url = reverse('tasks:search')
                 return HttpResponseRedirect(f'{url}?query={query}')
-
-            return HttpResponseRedirect('/history')
-
+            return redirect('tasks:history')
     else:
         form = EditForm(instance=current_task)
 
