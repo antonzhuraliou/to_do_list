@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
+    {% block content %}
     <div class="profile-layout">
         <div class="sidebar-minimal">
             <div class="sidebar-links">
@@ -28,7 +29,7 @@
                 <div class="info-row">
                     <div class="info-label">Username</div>
                     <div class="info-value">{{ name }}</div>
-                    <a href="#" class="action-button">Change</a>
+                    <a href="{% url 'accounts:change_username' %}" class="action-button">Change</a>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Email</div>
@@ -63,5 +64,6 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 </body>
 </html>

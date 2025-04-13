@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.db import models
 
 
 class LoginForm(forms.Form):
@@ -83,11 +82,11 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('An email address must be unique.')
         return email
 
-class ChangeUsernameForm(models.Model):
+class ChangeUsernameForm(forms.ModelForm):
 
-    username = models.CharField(
+    username = forms.CharField(
         label="New name",
-        widget = forms.CharField(
+        widget = forms.TextInput(
             attrs={
                 "id": "new-name",
                 "name": "username",
