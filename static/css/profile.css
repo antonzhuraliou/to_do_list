@@ -277,3 +277,20 @@ body {
 .modal-buttons .btn-cancel:hover {
     background-color: #888;
 }
+ul.errorlist,
+ul.errorlist.nonfield,
+.errorlist {
+    display: none;
+}
+.error-box {
+    background-color: #5c0000; /* глубокий красный */
+    color: #ffb3b3;            /* светло-красный текст */
+    border: 1px solid #ff4d4d;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
