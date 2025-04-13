@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.db import models
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -9,7 +11,7 @@ class LoginForm(forms.Form):
             attrs={
                 "id": "email",
                 "name": "email",
-                "placeholder": "Введите email",
+                "placeholder": "Enter your email",
                 "required": True,
             }
         ),
@@ -20,7 +22,7 @@ class LoginForm(forms.Form):
             attrs={
                 "id": "password",
                 "name": "password",
-                "placeholder": "Введите пароль",
+                "placeholder": "Enter your password",
                 "required": True,
             }
         ),
@@ -33,7 +35,7 @@ class RegisterForm(UserCreationForm):
             attrs={
                 "id": "username",
                 "name": "username",
-                "placeholder": "Введите username",
+                "placeholder": "Enter your username",
                 "required": True,
             }
         ),
@@ -44,7 +46,7 @@ class RegisterForm(UserCreationForm):
             attrs={
                 "id": "email",
                 "name": "email",
-                "placeholder": "Введите email",
+                "placeholder": "Enter your email",
                 "required": True,
             }
         ),
@@ -55,7 +57,7 @@ class RegisterForm(UserCreationForm):
             attrs={
                 "id": "password",
                 "name": "password",
-                "placeholder": "Введите password",
+                "placeholder": "Enter your password",
                 "required": True,
             }
         ),
@@ -64,9 +66,9 @@ class RegisterForm(UserCreationForm):
         label="Repeat password",
         widget=forms.PasswordInput(
             attrs={
-                "id": "repeat password",
+                "id": "repeat-password",
                 "name": "repeat password",
-                "placeholder": "Введите password",
+                "placeholder": "Enter your password",
                 "required": True,
             }
         ),
@@ -80,3 +82,21 @@ class RegisterForm(UserCreationForm):
         if email and User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             raise forms.ValidationError('An email address must be unique.')
         return email
+
+class ChangeUsernameForm(models.Model):
+
+    username = models.CharField(
+        label="New name",
+        widget = forms.CharField(
+            attrs={
+                "id": "new-name",
+                "name": "username",
+                "placeholder": "Enter your new name...",
+                "required": True,
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = ['username']
