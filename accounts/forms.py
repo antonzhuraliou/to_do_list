@@ -99,3 +99,22 @@ class ChangeUsernameForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username']
+
+
+class ChangeEmailForm(forms.ModelForm):
+
+    email = forms.CharField(
+        label="New email",
+        widget = forms.TextInput(
+            attrs={
+                "id": "new-email",
+                "name": "email",
+                "placeholder": "Enter your new email...",
+                "required": True,
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = ['email']
