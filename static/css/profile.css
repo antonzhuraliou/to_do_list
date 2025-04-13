@@ -152,3 +152,128 @@ body {
 .delete-section {
     border-color: rgba(255, 107, 107, 0.4);
 }
+.change-name-modal {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.change-name-modal h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #423a6f;
+}
+
+.change-name-modal label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #423a6f;
+}
+
+.change-name-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #423a6f;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.1);
+    color: #352f5b;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+}
+
+.cancel-btn {
+    background-color: #888;
+}
+
+.cancel-btn:hover {
+    background-color: #666;
+}
+.change-name-modal {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 360px;
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+    z-index: 1000;
+}
+
+.change-name-modal h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #423a6f;
+}
+
+.change-name-modal label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #423a6f;
+}
+
+.change-name-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #423a6f;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    color: #352f5b;
+    font-size: 15px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+    background-color: #423a6f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-buttons .btn:hover {
+    background-color: #574b90;
+}
+
+.modal-buttons .btn-cancel {
+    background-color: #aaa;
+    color: #fff;
+}
+
+.modal-buttons .btn-cancel:hover {
+    background-color: #888;
+}
