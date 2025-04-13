@@ -18,7 +18,9 @@
       {% csrf_token %}
       <div class="modal-buttons">
         <button type="submit" class="btn">Confirm change</button>
-        <button type="button" class="btn btn-cancel">Cancel</button>
+        <a href="{% url 'accounts:profile' %}">
+          <button type="button" class="btn btn-cancel">Cancel</button>
+        </a>
       </div>
     </form>
   </div>

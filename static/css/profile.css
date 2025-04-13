@@ -283,8 +283,8 @@ ul.errorlist.nonfield,
     display: none;
 }
 .error-box {
-    background-color: #5c0000; /* глубокий красный */
-    color: #ffb3b3;            /* светло-красный текст */
+    background-color: #5c0000;
+    color: #ffb3b3;
     border: 1px solid #ff4d4d;
     padding: 12px 16px;
     margin-bottom: 20px;
