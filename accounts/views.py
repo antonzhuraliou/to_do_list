@@ -1,4 +1,4 @@
-from .forms import LoginForm, RegisterForm, ChangeUsernameForm
+from .forms import LoginForm, RegisterForm, ChangeUsernameForm, ChangeEmailForm
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -62,12 +62,21 @@ def get_register(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 @login_required
-def change_username(request):
+def change_username(request, change):
     user = User.objects.get(id=request.user.id)
+
+    if change == 'username':
+        form = ChangeUsernameForm
+    else:
+        form = ChangeEmailForm
+
     if request.method == 'POST':
-        form = ChangeUsernameForm(request.POST, instance = user)
+        form = form(request.POST, instance = user)
         if form.is_valid():
             form.save()
             return redirect('accounts:profile')
-    form = ChangeUsernameForm(instance=user)
+        else:
+            return render(request, 'accounts/change_profile_info.html', context={'form':form})
+
+    form = form(instance=user)
     return render(request, 'accounts/change_profile_info.html', context = {'form': form})

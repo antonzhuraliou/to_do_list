@@ -8,5 +8,5 @@ urlpatterns = [
     path('login/', views.custom_login_view, name='login'),
     path('profile/', views.get_profile, name = 'profile'),
     path('register/', views.get_register, name = 'register'),
-    path('change_username/', views.change_username, name='change_username'),
+    path('change_username/<str:change>/', views.change_username, name='change_username'),
 ]

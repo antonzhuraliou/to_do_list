@@ -29,12 +29,12 @@
                 <div class="info-row">
                     <div class="info-label">Username</div>
                     <div class="info-value">{{ name }}</div>
-                    <a href="{% url 'accounts:change_username' %}" class="action-button">Change</a>
+                    <a href="{% url 'accounts:change_username' change='username' %}" class="action-button">Change</a>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Email</div>
                     <div class="info-value">{{ email }}</div>
-                    <a href="#" class="action-button">Change</a>
+                    <a href="{% url 'accounts:change_username' change='email' %}" class="action-button">Change</a>
                 </div>
             </div>
 
