@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.forms import PasswordChangeForm
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -118,3 +118,36 @@ class ChangeEmailForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['email']
+
+
+class ChangePasswordForm(PasswordChangeForm):
+
+    old_password = forms.CharField(
+        label="Old password",
+        widget = forms.PasswordInput(
+            attrs={
+                "placeholder": "Enter your old password...",
+                "required": True,
+            }
+        ),
+    )
+
+    new_password1 = forms.CharField(
+        label="New password",
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Enter your new password...",
+                "required": True,
+            }
+        ),
+    )
+
+    new_password2 = forms.CharField(
+        label="New password confirmation",
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm your new password...",
+                "required": True,
+            }
+        ),
+    )
