@@ -6,6 +6,8 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from .forms import ChangePasswordForm
+from django.contrib.auth import update_session_auth_hash
 
 def get_welcome_page(request):
     if request.user.is_authenticated:
@@ -80,3 +82,19 @@ def change_username(request, change):
 
     form = form(instance=user)
     return render(request, 'accounts/change_profile_info.html', context = {'form': form})
+
+
+def change_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ChangePasswordForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, user)
+            return redirect('accounts:profile')
+        else:
+            return render(request, 'registration/password_change_form.html', context = {'form': form})
+
+    form = ChangePasswordForm(user)
+
+    return render(request, 'registration/password_change_form.html', context = {'form': form})
