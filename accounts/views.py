@@ -8,6 +8,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .forms import ChangePasswordForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+
 
 def get_welcome_page(request):
     if request.user.is_authenticated:
@@ -76,6 +78,7 @@ def change_username(request, change):
         form = form(request.POST, instance = user)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your Username Has Been Successfully Updated')
             return redirect('accounts:profile')
         else:
             return render(request, 'accounts/change_profile_info.html', context={'form':form})
@@ -91,6 +94,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, user)
+            messages.add_message(request, messages.SUCCESS, 'Your Password Has Been Successfully Updated')
             return redirect('accounts:profile')
         else:
             return render(request, 'registration/password_change_form.html', context = {'form': form})
