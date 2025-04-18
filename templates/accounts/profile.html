@@ -19,6 +19,19 @@
         </ul>
     {% endif %}
     {% block content %}
+
+    {% block errors %}
+         {% if form.errors %}
+          <div class="error-box">
+            {% for key, value in form.errors.items %}
+              {% for error in value %}
+                <p class="error-message">{{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+          </div>
+    {% endif %}
+    {% endblock %}
+
     <div class="profile-layout">
         <div class="sidebar-minimal">
             <div class="sidebar-links">
