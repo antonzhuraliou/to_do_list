@@ -4,15 +4,9 @@
 {% block content %}
   <div class="change-name-modal">
     <h2>Change your name</h2>
-    {% if form.errors %}
-      <div class="error-box">
-        {% for key, value in form.errors.items %}
-          {% for error in value %}
-            <p class="error-message">{{ error }}</p>
-          {% endfor %}
-        {% endfor %}
-      </div>
-    {% endif %}
+    {% block errors %}
+      {{ block.super }}
+    {% endblock %}
     <form method="post">
       {{ form }}
       {% csrf_token %}
