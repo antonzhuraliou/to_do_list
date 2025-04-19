@@ -126,3 +126,12 @@ def contact_us(request):
             return redirect('accounts:profile')
 
     return render(request, 'accounts/contact_us.html', {'form': form})
+
+@login_required
+def delete_account(request):
+    user = request.user
+    if request.method == 'POST':
+        user.delete()
+        return redirect('accounts:welcome_page')
+
+    return render(request, 'delete_account.html')
