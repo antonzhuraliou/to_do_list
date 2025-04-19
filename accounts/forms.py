@@ -151,3 +151,20 @@ class ChangePasswordForm(PasswordChangeForm):
             }
         ),
     )
+
+
+class ContactUsForm(forms.Form):
+    subject = forms.CharField(
+        min_length=3,
+        label='Subject',
+        widget=forms.TextInput(
+            attrs={
+                "required": True,
+            }
+        )
+    )
+    message = forms.CharField(
+        min_length=10,
+        label = 'Message',
+        widget=forms.Textarea()
+    )
