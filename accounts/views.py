@@ -130,8 +130,10 @@ def contact_us(request):
 @login_required
 def delete_account(request):
     user = request.user
+    email = request.user.email
     if request.method == 'POST':
         user.delete()
-        return redirect('accounts:welcome_page')
+        send_email_for_person(subject=email_messages['after_delete_account']['subject'], message=email_messages['after_delete_account']['message'], email=email)
+        return render(request, 'delete_account_confirm.html')
 
     return render(request, 'delete_account.html')

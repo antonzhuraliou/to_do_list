@@ -15,7 +15,14 @@ email_messages = {
     We wanted to inform you that your password has been successfully changed.
     If you did not request this change, please contact us immediately at {settings.EMAIL_HOST_USER}.
     Best regards,
-    [Your Company Name]'''}
+    [Your Company Name]'''},
+
+    'after_delete_account': {'subject':'Your Account Has Been Successfully Deleted', 'message': '''Hello,
+    We confirm that your account has been successfully deleted from our system.
+    All associated personal data has been permanently removed in accordance with our privacy policy. If you did not request this deletion or believe it was done by mistake, please contact our support team as soon as possible.
+    Thank you for using our service. We're sorry to see you go and hope to see you again in the future.
+    Best regards,
+    [Your Company Name] Support Team'''}
 }
 
 def send_contact_email_reply(subject, message, email):
