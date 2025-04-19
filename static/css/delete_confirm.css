@@ -135,3 +135,41 @@ body {
         transform: translateY(0);
     }
 }
+.account-deleted-container {
+    max-width: 500px;
+    margin: 120px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.account-deleted-container h2 {
+    font-size: 26px;
+    color: #423a6f; /* Цвет в стиле проекта */
+    margin-bottom: 20px;
+}
+
+.account-deleted-container p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-return-home {
+    display: inline-block;
+    background-color: #6a5acd; /* Основной цвет проекта */
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.btn-return-home:hover {
+    background-color: #7a65c1;
+}
