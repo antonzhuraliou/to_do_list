@@ -1,4 +1,4 @@
-from .forms import LoginForm, RegisterForm, ChangeUsernameForm, ChangeEmailForm
+from .forms import LoginForm, RegisterForm, ChangeUsernameForm, ChangeEmailForm, ContactUsForm
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ChangePasswordForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from django.core.mail import EmailMessage
 
 
 def get_welcome_page(request):
@@ -65,6 +66,7 @@ def get_register(request):
 
     return render(request, 'accounts/register.html', {'form': form})
 
+
 @login_required
 def change_username(request, change):
     user = User.objects.get(id=request.user.id)
@@ -87,6 +89,7 @@ def change_username(request, change):
     return render(request, 'accounts/change_profile_info.html', context = {'form': form})
 
 
+@login_required
 def change_password(request):
     user = request.user
     if request.method == 'POST':
@@ -102,3 +105,33 @@ def change_password(request):
     form = ChangePasswordForm(user)
 
     return render(request, 'registration/password_change_form.html', context = {'form': form})
+
+
+@login_required
+def contact_us(request):
+    form = ContactUsForm()
+    if request.method == 'POST':
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+
+            email = request.user.email
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            send_contact_email_reply(subject, message, email)
+            messages.add_message(request, messages.SUCCESS, 'Your message has been received and is being processed. We will get back to you as soon as possible.')
+
+            return redirect('accounts:profile')
+
+    return render(request, 'accounts/contact_us.html', {'form': form})
+
+def send_contact_email_reply(subject, message, email):
+    email = EmailMessage(
+        subject = subject,
+        body = message,
+        from_email = settings.DEFAULT_FROM_EMAIL,
+        to = [settings.EMAIL_HOST_USER],
+        reply_to = [email]
+    )
+    email.send(fail_silently=False)
+
