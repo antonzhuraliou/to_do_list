@@ -1,0 +1,21 @@
+
+{% extends 'accounts/profile.html' %}
+
+{% block content %}
+  <div class="change-name-modal">
+    <h2>Send Us a Message</h2>
+    {% block errors %}
+      {{ block.super }}
+    {% endblock %}
+    <form method="post">
+      {{ form }}
+      {% csrf_token %}
+      <div class="modal-buttons">
+        <button type="submit" class="btn">Send your message</button>
+        <a href="{% url 'accounts:profile' %}">
+          <button type="button" class="btn btn-cancel">Cancel</button>
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

@@ -246,7 +246,19 @@ body {
     color: #352f5b;
     font-size: 15px;
 }
-
+.change-name-modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #423a6f;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    color: #352f5b;
+    font-size: 15px;
+    resize: vertical; /* позволяет тянуть поле вниз */
+    font-family: inherit; /* чтобы шрифт совпадал с остальными элементами */
+}
 .modal-buttons {
     display: flex;
     justify-content: space-between;
