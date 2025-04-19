@@ -30,6 +30,33 @@
 
   <body>
     <div class="container">
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <ul class="category-list">
+                <li><a href="#">All Tasks</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Urgent</a></li>
+                <li><a href="#">Completed</a></li>
+            </ul>
+            <form class="add-category-form" method="post" action="#">
+                {% csrf_token %}
+                <input
+                  type="text"
+                  name="new_category"
+                  placeholder="New category"
+                  class="add-category-input"
+                  required/>
+                <button type="submit" class="add-category-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </form>
+            <ul class="category-list extra-list">
+                <li><a href="#"><i class="fas fa-trash-alt"></i> Trash</a></li>
+            </ul>
+
+        </div>
+
        <div class="calendar-container">
         <div class="calendar-icon">
           <a href=" {% url 'calendar_tasks:calendar' %} "><span class="calendar-day">{{today_day}}</span></a>

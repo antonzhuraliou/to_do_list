@@ -277,3 +277,135 @@ a:hover {
   font-weight: bold;
   color: white;
 }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background-color: #2e2b4f; /* чуть ярче, но не ядреный */
+  padding: 2rem 1rem;
+  color: #ffffff;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h2 {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #f0f0f0;
+  letter-spacing: 1px;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list li {
+  margin-bottom: 1rem;
+}
+
+.category-list a {
+  color: #e6e6fa;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.6rem 1rem;
+  display: block;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-list a:hover {
+  background-color: #4c478a;
+  color: #ffffff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+.extra-list {
+  margin-top: 3rem; /* отделяет от основного списка */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+}
+
+.extra-list li {
+  margin-bottom: 1rem;
+}
+
+.extra-list a {
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.extra-list a i {
+  margin-right: 10px;
+  font-size: 1.3rem;
+  color: #b8b8d1;
+}
+
+.extra-list a:hover {
+  background-color: #4c478a;
+  color: #ffffff;
+}
+.add-category-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding: 0 0.5rem;
+}
+
+.add-category-input {
+  width: 75%;
+  padding: 0.4rem 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3a375e;
+  color: #e6e6fa;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.add-category-input::placeholder {
+  color: #a5a5c0;
+}
+
+.add-category-btn {
+  background: none;
+  border: none;
+  color: #e6e6fa;
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.add-category-btn:hover {
+  color: #ffffff;
+}
+
+
