@@ -82,6 +82,13 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('An email address must be unique.')
         return email
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if username and User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('A username must be unique.')
+        return username
+
+
 class ChangeUsernameForm(forms.ModelForm):
 
     username = forms.CharField(
