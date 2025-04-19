@@ -3,14 +3,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .forms import ChangePasswordForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from django.core.mail import EmailMessage
-from .utils import email_messages
+from .utils import email_messages, send_contact_email_reply, send_email_for_person
 
 
 def get_welcome_page(request):
@@ -128,21 +126,3 @@ def contact_us(request):
             return redirect('accounts:profile')
 
     return render(request, 'accounts/contact_us.html', {'form': form})
-
-def send_contact_email_reply(subject, message, email):
-    email = EmailMessage(
-        subject = subject,
-        body = message,
-        from_email = settings.DEFAULT_FROM_EMAIL,
-        to = [settings.EMAIL_HOST_USER],
-        reply_to = [email]
-    )
-    email.send(fail_silently=False)
-
-def send_email_for_person(subject, message, email):
-    send_mail(
-        subject = subject,
-        message = message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[email]
-    )
